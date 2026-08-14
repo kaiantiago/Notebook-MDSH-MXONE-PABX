@@ -76,22 +76,22 @@ Prompt:
 
 Objetivo:
 
-Obter uma visão geral antes de estudar comandos individuais e identificar os principais assuntos que deveriam ser aprofundados.
+* Obter uma visão geral antes de estudar comandos individuais e identificar os principais assuntos que deveriam ser aprofundados.
 
 2. Identificação dos comandos relevantes
-3. 
-Depois da visão geral, o objetivo foi identificar comandos úteis para atividades reais de administração e suporte.
+
+* Depois da visão geral, o objetivo foi identificar comandos úteis para atividades reais de administração e suporte.
 
 Prompt:
 "Liste os principais comandos MDSH relacionados à administração e troubleshooting do MX-ONE encontrados nas fontes. Para cada comando, informe sua finalidade, sintaxe básica, parâmetros relevantes e um exemplo de utilização, quando disponível na documentação."
 
 Objetivo:
 
-Transformar a documentação em uma espécie de referência rápida para consulta durante atividades de suporte.
+* Transformar a documentação em uma espécie de referência rápida para consulta durante atividades de suporte.
 
 3. Investigação de um comando específico
    
-Para aprofundar o conhecimento sobre comandos individuais, foi utilizada uma abordagem mais estruturada.
+* Para aprofundar o conhecimento sobre comandos individuais, foi utilizada uma abordagem mais estruturada.
 
 Prompt:
 
@@ -99,11 +99,11 @@ Prompt:
 
 Objetivo:
 
-Evitar respostas genéricas e concentrar a análise em informações efetivamente presentes nas fontes selecionadas.
+* Evitar respostas genéricas e concentrar a análise em informações efetivamente presentes nas fontes selecionadas.
 
 4. Prompt para troubleshooting
    
-Uma das aplicações mais importantes do NotebookLM foi utilizar a IA como apoio na interpretação de problemas encontrados durante a administração do ambiente.
+* Uma das aplicações mais importantes do NotebookLM foi utilizar a IA como apoio na interpretação de problemas encontrados durante a administração do ambiente.
 
 Prompt:
 
@@ -111,11 +111,11 @@ Prompt:
 
 Objetivo:
 
-Utilizar a IA como ferramenta de investigação, evitando executar alterações no PABX sem compreender previamente o impacto.
+* Utilizar a IA como ferramenta de investigação, evitando executar alterações no PABX sem compreender previamente o impacto.
 
 5. Prompt para análise de erro
    
-Também foi utilizado um formato específico para diferenciar erros de sintaxe, permissões, configuração e problemas do sistema.
+* Também foi utilizado um formato específico para diferenciar erros de sintaxe, permissões, configuração e problemas do sistema.
 
 Prompt:
 
@@ -123,7 +123,7 @@ Prompt:
 
 Objetivo:
 
-Estimular uma análise baseada em evidências em vez de simplesmente solicitar uma solução.
+* Estimular uma análise baseada em evidências em vez de simplesmente solicitar uma solução.
 
 6. Prompt de comparação entre comandos
    
@@ -133,11 +133,11 @@ Prompt:
 
 Objetivo:
 
-Facilitar a compreensão de comandos semelhantes e evitar a utilização de um comando inadequado para determinada situação.
+* Facilitar a compreensão de comandos semelhantes e evitar a utilização de um comando inadequado para determinada situação.
 
 7. Prompt para validação da resposta
    
-Uma etapa importante da engenharia de prompts foi solicitar que o próprio NotebookLM apresentasse as limitações da resposta.
+* Uma etapa importante da engenharia de prompts foi solicitar que o próprio NotebookLM apresentasse as limitações da resposta.
 
 Prompt:
 
@@ -145,45 +145,45 @@ Prompt:
 
 Objetivo:
 
-Reduzir o risco de aceitar como fato uma informação que não esteja presente na documentação utilizada pelo NotebookLM.
+* Reduzir o risco de aceitar como fato uma informação que não esteja presente na documentação utilizada pelo NotebookLM.
 
 ## Cicatrizes e dificuldades encontradas
 
-Durante os testes, algumas dificuldades foram identificadas na utilização da IA para consultas técnicas sobre o MX-ONE.
+* Durante os testes, algumas dificuldades foram identificadas na utilização da IA para consultas técnicas sobre o MX-ONE.
 
-Respostas excessivamente genéricas
+* Respostas excessivamente genéricas
 
-Perguntas muito abertas, como:
-"Como administrar um MX-ONE?"
-produziram respostas amplas demais para uma necessidade operacional.
+   Perguntas muito abertas, como:
+   "Como administrar um MX-ONE?"
+   produziram respostas amplas demais para uma necessidade operacional.
 
-Ajuste realizado: as perguntas passaram a especificar o comando, o contexto e o resultado esperado.
+* Ajuste realizado: as perguntas passaram a especificar o comando, o contexto e o resultado esperado.
 
-Falta de contexto operacional
+* Falta de contexto operacional
 
-Perguntar apenas pelo significado de um comando não necessariamente fornece informações suficientes para resolver um problema real.
+* Perguntar apenas pelo significado de um comando não necessariamente fornece informações suficientes para resolver um problema real.
 
-Por isso, os prompts passaram a incluir:
+* Por isso, os prompts passaram a incluir:
 
-comando executado;
-retorno apresentado pelo sistema;
-objetivo da operação;
-versão do MX-ONE;
-informações adicionais relevantes;
-solicitação de validação nas fontes.
-Risco de interpretações não sustentadas
+   comando executado;
+   retorno apresentado pelo sistema;
+   objetivo da operação;
+   versão do MX-ONE;
+   informações adicionais relevantes;
+   solicitação de validação nas fontes.
+   Risco de interpretações não sustentadas
 
-Em determinados casos, uma resposta pode parecer tecnicamente plausível, mas não estar explicitamente documentada nas fontes.
+* Em determinados casos, uma resposta pode parecer tecnicamente plausível, mas não estar explicitamente documentada nas fontes.
 
-Para contornar esse problema, foi adicionada uma instrução recorrente:
+* Para contornar esse problema, foi adicionada uma instrução recorrente:
 
-"Utilize exclusivamente as fontes disponíveis neste notebook."
+   "Utilize exclusivamente as fontes disponíveis neste notebook."
 
-Também passou a ser solicitado que a IA diferenciasse informações documentadas de interpretações ou inferências.
+* Também passou a ser solicitado que a IA diferenciasse informações documentadas de interpretações ou inferências.
 
-Necessidade de perguntas de aprofundamento
+* Necessidade de perguntas de aprofundamento
 
-Outra estratégia utilizada foi solicitar que a IA não respondesse imediatamente quando faltassem informações importantes.
+* Outra estratégia utilizada foi solicitar que a IA não respondesse imediatamente quando faltassem informações importantes.
 
 Prompt:
 
@@ -192,13 +192,13 @@ Essa abordagem transforma o NotebookLM de um simples mecanismo de perguntas e re
 
 ## Resultado da engenharia de prompts
 
-A utilização de prompts progressivos permitiu transformar o NotebookLM em uma ferramenta de apoio ao estudo e à consulta técnica do Mitel MX-ONE PABX.
+* A utilização de prompts progressivos permitiu transformar o NotebookLM em uma ferramenta de apoio ao estudo e à consulta técnica do Mitel MX-ONE PABX.
 
-O processo passou de perguntas genéricas para uma metodologia baseada em:
+* O processo passou de perguntas genéricas para uma metodologia baseada em:
 
-Pergunta → Contexto → Investigação → Evidências → Validação → Conclusão
+   Pergunta → Contexto → Investigação → Evidências → Validação → Conclusão
 
-Essa abordagem também permite reutilizar os mesmos princípios em outros ambientes de infraestrutura, documentação técnica e troubleshooting.
+* Essa abordagem também permite reutilizar os mesmos princípios em outros ambientes de infraestrutura, documentação técnica e troubleshooting.
 
 ## Exemplo de solicitação executada no notebook requisitando uma explicação detalhada do comando extension
 
