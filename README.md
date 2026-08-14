@@ -34,6 +34,12 @@ O NotebookLM pode ser utilizado para pesquisar comandos, entender sua finalidade
 
 Este material é destinado principalmente ao uso técnico e à consulta durante atividades de suporte e administração do ambiente de telefonia.
 
+## Introdução: O que é PABX, MiVoice MX-ONE e MDSH
+
+* PABX (Private Branch Exchange / Central Telefônica Privada): É um sistema de telefonia voltado para o ambiente corporativo que atua como um servidor central. Sua finalidade principal é realizar a comutação e o roteamento de chamadas internas (entre ramais de colegas de trabalho) e externas (com o público em geral), utilizando troncos conectados à rede pública de telefonia. Enquanto os sistemas analógicos tradicionais dependiam de infraestrutura física cabeada, placas e equipamentos locais, os sistemas modernos IP PABX executam chamadas de voz, vídeo e dados através da internet (redes de pacotes).
+* MiVoice MX-ONE: É o sistema PABX IP de nível empresarial desenvolvido pela Mitel. Ele combina software e hardware de gateways de mídia para oferecer comunicações unificadas e flexíveis em grande escala.
+* MDSH (Mitel Directory Shell / MX-ONE Shell): É a interface de linha de comando (CLI) baseada em UNIX executada diretamente sobre o sistema operacional Linux do servidor principal do MX-ONE (o Service Node). Por meio do MDSH, o administrador gerencia configurações de rede, manutenção física, segurança e todas as alterações de dados de usuários e telefonia do PABX.
+
 ## Observação
 
 O conteúdo do NotebookLM é uma ferramenta de apoio e não substitui a documentação oficial da Mitel nem os procedimentos internos de mudança, segurança e administração da infraestrutura.
@@ -281,11 +287,6 @@ Risco de Perda de Dados em Restores: Se ocorrer uma falha grave e o sistema prec
 Se o comando extension foi executado mas nenhum backup foi gerado posteriormente, todas as novas criações serão descartadas na inicialização regenerativa
 
 Uso de Backups Agendados (crontab): Para mitigar o esquecimento de backups manuais pós-configuração de ramais, certifique-se de que a conta de administração (mxone_admin) possua rotinas de data_backup configuradas no agendador de tarefas do Linux (crontab -e)
-
-## Introdução: O que é PABX, MiVoice MX-ONE e MDSH
-* PABX (Private Branch Exchange / Central Telefônica Privada): É um sistema de telefonia voltado para o ambiente corporativo que atua como um servidor central. Sua finalidade principal é realizar a comutação e o roteamento de chamadas internas (entre ramais de colegas de trabalho) e externas (com o público em geral), utilizando troncos conectados à rede pública de telefonia. Enquanto os sistemas analógicos tradicionais dependiam de infraestrutura física cabeada, placas e equipamentos locais, os sistemas modernos IP PABX executam chamadas de voz, vídeo e dados através da internet (redes de pacotes).
-* MiVoice MX-ONE: É o sistema PABX IP de nível empresarial desenvolvido pela Mitel. Ele combina software e hardware de gateways de mídia para oferecer comunicações unificadas e flexíveis em grande escala.
-* MDSH (Mitel Directory Shell / MX-ONE Shell): É a interface de linha de comando (CLI) baseada em UNIX executada diretamente sobre o sistema operacional Linux do servidor principal do MX-ONE (o Service Node). Por meio do MDSH, o administrador gerencia configurações de rede, manutenção física, segurança e todas as alterações de dados de usuários e telefonia do PABX.
 
 ## Guia Estruturado: Como Criar um Ramal (Extension)
 No MiVoice MX-ONE, a criação de um ramal é feita em duas fases lógicas: primeiro, inicializa-se a entidade básica do ramal (que contém o perfil de serviço do usuário) e, depois, associa-se esse ramal à tecnologia física ou virtual correspondente (IP, DECT ou Remoto).
