@@ -124,7 +124,7 @@ Prompt:
 Objetivo:
 Reduzir o risco de aceitar como fato uma informação que não esteja presente na documentação utilizada pelo NotebookLM.
 
-##Cicatrizes e dificuldades encontradas
+## Cicatrizes e dificuldades encontradas
 
 Durante os testes, algumas dificuldades foram identificadas na utilização da IA para consultas técnicas sobre o MX-ONE.
 Respostas excessivamente genéricas
