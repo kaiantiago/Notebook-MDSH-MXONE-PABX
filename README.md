@@ -403,4 +403,51 @@ Permite capturar e analisar registros lógicos de anormalidade do sistema (Error
 
 * UNIX Command (no MX-ONE): Utilitários administrativos integrados ao MDSH que utilizam identificações dinâmicas de processos e se comunicam através de proxies de mensagem apenas durante o período em que são ativados manualmente pelo administrador
 
+## Conjunto de Prompts Reutilizáveis
+
+* Kit de Prompts Reutilizáveis para o MX-ONE MDSH
+
+Categoria 1: Criação e Provisionamento de Ramais
+
+Use estes prompts quando precisar gerar linhas de comando exatas para cadastrar novos usuários ou telefones.
+
+* Prompt para Ramal IP (SIP/H.323):
+"Atue como especialista em MX-ONE. Com base nos help files do notebook, gere a sequência exata de comandos do MDSH para criar um ramal IP de número <NÚMERO_DO_RAMAL> na LIM <LIM_ID>. Ele usará o protocolo <SIP/H323>, o perfil de serviço CSP <NÚMERO_CSP> e terá a identidade de terminal <URI_SIP>. Inclua no final o comando para validar se ele foi provisionado corretamente."
+
+* Prompt para Ramal Sem Fio (DECT):
+"Consulte os manuais de dect_extension no notebook. Preciso registrar um ramal sem fio DECT número <NÚMERO_DO_RAMAL>. O aparelho físico tem o código IPEI <CÓDIGO_IPEI> e deve usar a chave de autenticação <CHAVE_AUTENTICACAO>. Forneça a sintaxe exata do comando, descreva o que o parâmetro --send-duration faz e explique o que acontece se o portátil utilizar um cartão SIM em vez do número de série do aparelho."
+
+* Prompt para Teclas e Facilidades (MNS/Diversion):
+"Preciso programar as teclas físicas de um aparelho usando o comando extension_key. Gere o comando exato para que o ramal <RAMAL_A> possua uma tecla física <NÚMERO_DA_TECLA> com a função MNS para monitorar o status do ramal <RAMAL_B>. Quero que a opção de toque (alert-type) seja configurada para <OPÇÃO: ex: RINGING/NOT RINGING>. Liste quais modelos de aparelho aceitam as opções de volume normal de toque durante uma chamada ativa."
+
+Categoria 2: Rotinas de Backup, Espelhamento e Segurança
+
+Use estes prompts para revisar a segurança de dados e evitar a perda de ramais criados em caso de quedas de energia ou falhas no banco Cassandra.
+
+* Prompt para Revisão de Alertas e Variáveis de Backup:
+"Analise o capítulo de Backup e Restore do Guia do Administrador. Explique detalhadamente o comportamento do sistema quando a variável de ambiente $_MD_BACKUP_OPTION está definida como <OPÇÃO: AUTO, WARN-AUTO ou WARN-BLOCK>. O que acontece com as alterações de dados de ramais feitas recentemente se o sistema sofrer uma inicialização regenerativa (Start After Data Restore) antes que um data_backup seja executado?"
+
+* Prompt para Agendamentos de Backup (Crontab):
+"Escreva uma linha de comando para o crontab -e do Linux como usuário mxone_admin que automatize a seguinte rotina: realizar um data_backup padrão todos os dias às <HORÁRIO>, e criar um espelhamento de configuração completo (config_mirror) com backup de segurança (--safetybackup) todo(a) <DIA_DA_SEMANA> às <HORÁRIO>. Certifique-se de usar os caminhos de diretório corretos do MDSH."
+
+Categoria 3: Diagnóstico de Falhas, Traces e Logs
+
+Essencial para momentos de instabilidade no tráfego de voz ou falhas de registro de terminais.
+
+* Prompt para Rastreamento de Chamadas (Trace):
+
+"O usuário do ramal <NÚMERO_RAMAL> está relatando falhas para completar chamadas. Com base na seção de 'Fault Location' do guia, explique as diferenças lógicas entre um 'Sequence trace' e um 'Unit trace' no MX-ONE. Em seguida, forneça os comandos do utilitário trace para:
+
+Verificar se há instâncias de rastreamento livres.
+
+Iniciar a captura de sinalização especificamente para este ramal.
+
+Parar o trace e imprimir o relatório em ordem cronológica na tela."*
+
+Categoria 4: Integração com o Active Directory (AD)
+
+Para auditar ou configurar o login centralizado de administradores e usuários normais no servidor.
+
+* Prompt para Atributos e Grupos Unix no AD:
+"Consulte as tabelas de mapeamento LDAP/AD do manual do administrador. Quais são os atributos exatos de Active Directory que devem ser configurados na aba de atributos UNIX para mapear o grupo <NÚMERO/NOME_DO_GRUPO: ex: eri_sn_g ou mxone_cmd_g>? Se eu quiser criar uma conta do tipo mxone_user no AD, de quais grupos essa conta obrigatoriamente deve fazer parte e qual grupo deve ser definido como o primário?"
  
