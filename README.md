@@ -66,7 +66,7 @@ Troubleshooting: utilizar a IA para interpretar erros e resultados obtidos no am
 
 Validação: solicitar que a IA identifique limitações, ambiguidades e possíveis inconsistências nas respostas.
 
-1. Prompt de exploração inicial
+# 1. Prompt de exploração inicial
 
 O primeiro objetivo foi fazer com que o NotebookLM apresentasse uma visão geral do conteúdo disponível nas fontes.
 
@@ -78,7 +78,7 @@ Objetivo:
 
 * Obter uma visão geral antes de estudar comandos individuais e identificar os principais assuntos que deveriam ser aprofundados.
 
-2. Identificação dos comandos relevantes
+# 2. Identificação dos comandos relevantes
 
 * Depois da visão geral, o objetivo foi identificar comandos úteis para atividades reais de administração e suporte.
 
