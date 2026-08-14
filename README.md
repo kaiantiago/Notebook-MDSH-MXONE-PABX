@@ -66,7 +66,7 @@ Troubleshooting: utilizar a IA para interpretar erros e resultados obtidos no am
 
 Validação: solicitar que a IA identifique limitações, ambiguidades e possíveis inconsistências nas respostas.
 
-* 1. Prompt de exploração inicial
+1. Prompt de exploração inicial
 
 O primeiro objetivo foi fazer com que o NotebookLM apresentasse uma visão geral do conteúdo disponível nas fontes.
 
@@ -78,7 +78,7 @@ Objetivo:
 
 * Obter uma visão geral antes de estudar comandos individuais e identificar os principais assuntos que deveriam ser aprofundados.
 
-* 2. Identificação dos comandos relevantes
+2. Identificação dos comandos relevantes
 
 * Depois da visão geral, o objetivo foi identificar comandos úteis para atividades reais de administração e suporte.
 
@@ -89,7 +89,7 @@ Objetivo:
 
 * Transformar a documentação em uma espécie de referência rápida para consulta durante atividades de suporte.
 
-* 3. Investigação de um comando específico
+3. Investigação de um comando específico
    
 * Para aprofundar o conhecimento sobre comandos individuais, foi utilizada uma abordagem mais estruturada.
 
@@ -101,7 +101,7 @@ Objetivo:
 
 * Evitar respostas genéricas e concentrar a análise em informações efetivamente presentes nas fontes selecionadas.
 
-* 4. Prompt para troubleshooting
+4. Prompt para troubleshooting
    
 * Uma das aplicações mais importantes do NotebookLM foi utilizar a IA como apoio na interpretação de problemas encontrados durante a administração do ambiente.
 
@@ -113,7 +113,7 @@ Objetivo:
 
 * Utilizar a IA como ferramenta de investigação, evitando executar alterações no PABX sem compreender previamente o impacto.
 
-* 5. Prompt para análise de erro
+5. Prompt para análise de erro
    
 * Também foi utilizado um formato específico para diferenciar erros de sintaxe, permissões, configuração e problemas do sistema.
 
@@ -125,7 +125,7 @@ Objetivo:
 
 * Estimular uma análise baseada em evidências em vez de simplesmente solicitar uma solução.
 
-* 6. Prompt de comparação entre comandos
+6. Prompt de comparação entre comandos
    
 Prompt:
 
@@ -135,7 +135,7 @@ Objetivo:
 
 * Facilitar a compreensão de comandos semelhantes e evitar a utilização de um comando inadequado para determinada situação.
 
-* 7. Prompt para validação da resposta
+7. Prompt para validação da resposta
    
 * Uma etapa importante da engenharia de prompts foi solicitar que o próprio NotebookLM apresentasse as limitações da resposta.
 
