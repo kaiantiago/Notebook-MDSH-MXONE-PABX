@@ -1,0 +1,775 @@
+MDSH> extension_profile -?
+NAME
+     extension_profile - manage an extension_profile
+
+SYNOPSIS
+     extension_profile [-v] [-V] -c --csp x [--customer x] [--csp-name\
+         x] [--ext-cdiv x] [--ext-cnnlog x] [--ext-npres x] [--ext-roc x]\
+         [--ext-serv x] [--ext-traf x] [--forced-disconnect-time x]\
+         [--idle-delay-time x] [--offered-time x] [--ext-legacy x]
+     extension_profile [-v] [-V] -e --csp x [--customer x]
+     extension_profile [-v] [-V] -i --csp x [--csp-name x] [--customer\
+         x] --ext-cdiv x [--ext-cnnlog x] --ext-npres x --ext-roc x\
+         --ext-serv x --ext-traf x [--forced-disconnect-time x]\
+         [--idle-delay-time x] [--offered-time x] [--ext-legacy x]
+     extension_profile [-v] [-V] -p [--csp m] [--csp-name x]\
+         [--customer x] [--ext-cdiv x] [--ext-cnnlog x] [--ext-npres x]\
+         [--ext-roc x] [--ext-serv x] [--ext-traf x]\
+         [--forced-disconnect-time x] [--idle-delay-time x] [--offered-time\
+         x] [--ext-legacy x] [±s [x]]
+
+PARAMETERS
+     -c, --change
+        Change some settings. I.e. reconfiguration of an item (or several
+        items).
+        The switch takes no arguments.
+
+     --csp
+        Each Common Service Profile (--csp) represent a combination of
+        characteristics for --ext-cdiv, --ext-npres, --ext-roc, --ext-serv
+        and --ext-traf. Argument must be an integer in the range 0 to 500.
+        The switch requires an argument.
+
+     --csp-name
+        States a name for a Common Service Profile (CSP). Allowed
+        characters: (0..9,a..z,A..Z, ) Accepted argument length is 1 to 20
+        characters.
+        The switch requires an argument. The argument is single-valued.
+
+     --customer
+        Customer number for the extension. Customer 0 is the default
+        customer of the exchange. Argument must be an integer in the range
+        0 to 50000. For print operations the default is function dependent,
+        for all other operations the default is 0 (zero).
+        The switch requires an argument. The argument is single-valued.
+
+     -e, --erase
+        Erase some settings. I.e. deconfiguration of an item (or several
+        items).
+        The switch takes no arguments.
+
+     --ext-cdiv
+        A switch that has a collection of individual settings. Each
+        individual setting is a digit in the numerical value string.
+        Pad to length is enabled for this switch. The digits have the
+        following meaning:
+        D1: External Follow-me.
+        States whether user is permitted to do external Follow-me using
+        service code *22# (or equivalent soft key).
+                0 - No.
+                1 - Yes.
+        D2: Follow-me.
+        States whether user is permitted to do internal Follow-me using
+        service code *21* (or soft key 'Follow-Me').
+                0 - No.
+                1 - Yes.
+        D3: Diversion bypass.
+        States whether diversion bypass is permitted or not. (Bypass of
+        diversion can be set to always permit by using an AS parameter
+        (PARNUM 75)).
+                0 - No.
+                1 - Yes.
+        D4: Diversion on origin extension or a PBX-operator.
+        States whether diversion on origin (extension or operator) is
+        permitted or not and if common or individual diversion position
+        shall be used.
+                0 - Default feature not permitted.
+                1 - Individual diversion position.
+                2 - Common diversion position.
+                3 - No diversion shall take place.
+        D5: Diversion on origin public line.
+        States whether diversion on origin (public external line) is
+        permitted or not and if common or individual diversion position
+        shall be used.
+                0 - Default feature not permitted.
+                1 - Individual diversion position.
+                2 - Common diversion position.
+                3 - No diversion shall take place.
+        D6: Diversion on origin private line.
+        States whether diversion on origin (private external line) is
+        permitted or not and if common or individual diversion position
+        shall be used.
+                0 - Default feature not permitted.
+                1 - Individual diversion position.
+                2 - Common diversion position.
+                3 - No diversion shall take place.
+        D7: Auto bypass of FM for SMS.
+        States if diversion bypass for SMS is permitted for follow me.
+                0 - No.
+                1 - Yes. (recommended)
+        D8: Auto bypass of EFM for SMS.
+        States if diversion bypass for SMS is permitted for external follow
+        me.
+                0 - No.
+                1 - Yes. (recommended)
+        D9: Permits direct diversion to.
+                0 - Only an individual divertee position(**).
+                1 - An individual or common divertee position(*).
+        D10: Permits diversion to an individual divertee position on
+        busy(**).
+                0 - No.
+                1 - Yes.
+        D11: Permits diversion to an individual divertee position on
+        no-answer(**).
+                0 - No.
+                1 - Yes.
+        D12: Multi Directory Diversion.
+        (This facility is only allowed for SIP main directory number and
+        for ODN on digital extension).
+                0 - No.
+                1 - Yes.
+        D13D14: Remote Programming of Diversions.
+                00 - Default or feature not allowed.
+                01 - Permitted to program follow-me.
+                02 - Permitted to program external follow-me.
+                04 - Permitted to program diversion on no reply.
+                08 - Permitted to program diversion on busy.
+                16 - Permitted to program direct diversion.
+                32 - Permitted to program diversion on groups.
+                     Sum of these values is allowed.
+        D15: Diversion on origin.
+        States whether private network parties shall have influence or not
+        about which of D4-D6 to use.
+                0 - Default. Only local type of origin is used for the decision
+                    of which of D4-D6 to use.
+                1 - Both local and private network type of origin is used for the
+                    decision of which of D4-D6 to use.
+        (*) If an individual divertee position has not been initiated the
+        common divertee position is chosen. If no common divertee position
+        has been initiated the procedure for diversion cannot be done.
+        (**) If no individual divertee position has been initiated the
+        procedure for this facility cannot be utilized.
+        The switch requires an argument. The argument is single-valued.
+
+     --ext-cnnlog
+        States the characteristics for the centralized name and number log.
+        Pad to length is enabled for this switch. The digits have the
+        following meaning:
+        D1: General centralized name and number log option.
+                0 - The centralized name and number log is not active (default).
+                1 - The centralized name and number log is active.
+        D2: Centralized name and number log, swap call direction option.
+                0 - The centralized name and number log, call direction is not
+                    swapped (default).
+                1 - The centralized name and number log, call direction is swapped.
+        For digit D2, the following pickup services can have it's call
+        direction swapped: Casacade group answer, Common bell, Group,
+        Individual, MNS, Night bell and Take own call.
+        The switch requires an argument. The argument is single-valued.
+
+     --ext-legacy
+        States the unique characteristics for legacy terminals.
+        Pad to length is enabled for this switch. The digits have the
+        following meaning:
+        D1: Automatic Call Distribution supervisor functionality, only
+        supported on DTS.
+                0 - Not an ACD supervisor.
+                1 - Extension with ACD supervisor functionality.
+        The switch requires an argument. The argument is single-valued.
+
+     --ext-npres
+        A switch that has a collection of individual settings. Each
+        individual setting is a digit in the numerical value string.
+        Pad to length is enabled for this switch. The digits have the
+        following meaning:
+        D1: A-number request from PSTN.
+        The extension is allowed or not allowed to request an A-number from
+        the PSTN (if the feature is offered).
+                0 - No.
+                1 - Yes.
+        D2: Number presentation restricted.
+        States whether the number is restricted or not (SIP tie line is
+        treated as internal), e.g. if the A-number is presented to the
+        B-party or not.
+                0 - No.
+                1 - Internal.
+                2 - External.
+                3 - Internal and external.
+        NOTICE: For internal calls and for private network calls using SIP
+        tie-lines, the CLIR/COLR category is sub-divided in
+        CLIR/COLR-internal and CLIR/COLR-external. CLIR/COLR-internal is
+        used for internal calls and private network calls using SIP
+        tie-lines. CLIR/COLR-external is used for public network calls
+        using SIP trunk lines. If the other party is outside the own PBX
+        (and SIP trunk/tie-line is not used), restriction will be sent for
+        the number, if any of CLIR/COLR-internal or CLIR/COLR-external are
+        set. See Numbering Operational Directions, section Calling Party
+        Number, for more details.
+        D3: CLIR per call.
+        States whether name and number restriction (CLIR) is permitted per
+        call by dialing the procedure *42# before the B-party number.
+                0 - No.
+                1 - Yes.
+        D4: Extension number to PSTN.
+        States whether the extension number or common public number is sent
+        to the PSTN (For this to be permitted, the extension must belong to
+        the public DDI number series of the PBX).
+                0 - No. Common public number will be used, and must be set.
+                1 - Yes. Default, extension number will be used.
+        D5: CLIR/COLR (name and number presentation restriction override).
+                0 - CLIR/COLR override not permitted. (Default)
+                1 - CLIR/COLR override is permitted
+                    when type of connected party is private 1).
+                2 - CLIR/COLR override is permitted
+                    when type of connected party is public 2).
+                3 - Both 1 and 2 above are permitted.
+        1) Private means an extension or a tie-line without network
+           services in the same system (internal call) or within the
+           private network.
+        2) Public means a subscriber in the public network.
+        Extension is able to display the other party's number even if the
+        presentation is restricted.
+        D6: Never display number from PSTN.
+        States whether number from PSTN shall be displayed or not. No means
+        that the number will be displayed.
+                0 - No.
+                1 - Yes.
+        D7: Use group identity for incoming calls.
+        States if the group number and name shall be used when sending the
+        number and name identities to the calling user. No means that the
+        user number will be sent. This function is only supported by
+        generic extensions.
+                0 - No.
+                1 - Yes.
+        The switch requires an argument. The argument is single-valued.
+
+     --ext-roc
+        A switch that has a collection of individual settings. Each
+        individual setting is a digit in the numerical value string.
+        Pad to length is enabled for this switch. The digits have the
+        following meaning:
+        D1: Facility restriction level.
+        Attribute level to make a selective restriction of the use of the
+        outgoing routes.
+                0..7 - Values.
+        D2: Account code for LCR.
+        States forced account code when the value of the ACCT parameter
+        stated in the LCR tables is X.
+                0 - X is 1 or 2.
+                1 - X is 2.
+                2 - Forced account code is never required.
+        D3: Off-hook queuing level.
+        Specifies the off hook queuing level, it is compared against the
+        outgoing routes threshold level.
+                0 - Search for a free route choice is done up to the threshold
+                    level 1.
+                1 - Search for a free route is done up to the threshold level 1.
+                    After that the call is put into the queue for 8 seconds
+                    (AS, PARNUM 107) waiting for the first hand choice to
+                    become free. If it does not occur, search is started again
+                    from the first hand choice and continues up to the route
+                    choice marked as threshold level 2.
+                2 - Search for a free route is done up to the threshold level 2.
+                    After that the call is put into the queue for 8 seconds
+                    (AS, PARNUM 107) waiting for the first hand choice to
+                    become free. If it does not occur, search is started again
+                    from the first hand choice and continues up to the last
+                    hand choice.
+                3 - Less restricted level. Search is done for all available route
+                    choices and no queuing is applied.
+        D4: Authorization type for route selection.
+        Attribute to make a selective restriction of the use of the
+        outgoing routes.
+                0 - Normal extension.
+                1 - Class A.
+                2 - Class B.
+                3 - Class C.
+                4 - Class D.
+                5 - Data extension.
+                6 - PABX operator.
+                7 - Class E.
+        D5D6: TollExchange (01..09, 11).
+        Attribute level (category) to make a selective restriction of the
+        use of the outgoing routes.
+                01 - (default) Toll exchange not used or extension
+                     authorized to make outgoing calls towards automatic
+                     zone, trunk and international network.
+                02 - Hospitality extension authorized for outgoing calls
+                     as category 01.
+                03 - Extension authorized for local calls only.
+                04 - Extension with priority, authorized to make outgoing
+                     calls towards automatic zone, trunk and international
+                     network as well as chargeable services.
+                05 - Extension without priority, free of charge, authorized
+                     to make the same calls as category 04.
+                06 - Trunk coin box or post office switch board authorized
+                     to make the same calls as category 01.
+                07 - Extension without priority, authorized to make calls
+                     as category 04.
+                09 - Coin box.
+                11 - Dispatcher(used for private networks).
+        The switch requires an argument. The argument is single-valued.
+
+     --ext-serv
+        States the characteristics for services that may be initiated to or
+        from an extension. A switch that has a collection of individual
+        settings. Pad to length is enabled for this switch. The digits have
+        the following meaning:
+        D1: Callback characteristics as calling party.
+                0 - Not permitted to initiate call back.
+                1 - Permitted to initiate automatic call back towards
+                    another extension in the same exchange or the private
+                    network.
+                2 - Permitted to initiate automatic call back towards
+                    another extension in the same exchange, in the private.
+                    network or towards an external line (no restriction).
+                3 - Permitted to initiate automatic call back towards the
+                    private network and towards an external line, without
+                    dialing a procedure. (No restriction and automatic
+                    initiation of callback at busy. This value is mostly
+                    used if the terminal is controlled by an application).
+        D2,D3 and D4 define the characteristics for the busy service, Call
+        Waiting. If the called party (B-party) is busy, the calling party
+        (A-party) may (after receiving busy tone) request (initiate) Call
+        Waiting via DTMF signaling (standard market: '5'). [Note that the
+        settings for B-party (D3) and C-party (D4) will have no effect for
+        SIP terminals and for H.323 terminals with Free-On-2nd activated.
+        Call Waiting as busy service is not supported on SIP. However, a
+        multiline terminal (as for free-On-2nd) will display incoming calls
+        on a terminal Line key which also may generate a local Call Waiting
+        tone. The A-party will just get alerting tone.]
+        D2: Call waiting request permission.
+        States whether call waiting is permitted to be requested.
+                0 - No.
+                1 - Yes.
+        D3: Call waiting protection B.
+        The B-party is the target of the Call Waiting request. B terminal
+        is notified via call waiting tone and/or blinking led on a line key.
+                0 - Full protection. No Call Waiting notification.
+                1 - Only Call Waiting notification from another extension.
+                2 - Only Call Waiting notification from another extension
+                    and PBX operator.
+                3 - No protection. Call waiting notification from another
+                    extension, PBX operator and external line.
+        D4: Call waiting protection C.
+        The C-party is the one in speech with the target of the Call
+        Waiting request.
+                0 - No, call waiting tone will NOT be played on target.
+                1 - Yes, call waiting tone will be played on target.
+        D5: Intrusion capability level (ICL).
+        The intrusion requester's capability level, which will be compared
+        to the intruded and third party's intrusion protection level.
+                0 - Intrusion request is not allowed.
+                1 - Intrusion capability level 1.
+                2 - Intrusion capability level 2.
+                3 - Intrusion capability level 3 (highest).
+        D6: Intrusion protection level (IPL).
+        The intruded or third party's intrusion protection levels, which
+        will be compared to the intrusion capability level (ICL) of the
+        requester.
+                0 - No protection. Intrusion always allowed.
+                1 - Protection level 1. Can be intruded by requesters who have
+                    ICL higher than 1.
+                2 - Protection level 2. Can be intruded by requesters who have
+                    ICL higher than 2.
+                3 - Protection level 3. Can not be intruded.
+        D7: Malicious call tracing.
+        States if an extension is authorized to initiate malicious call
+        tracing.
+                0 - Call tracing is NOT allowed.
+                1 - Call tracing is allowed.
+        D8: Manual message waiting.
+        States if an extension is allowed to use the service Manual Message
+        Waiting.
+                0 - Not allowed.
+                1 - Allowed.
+        D9: Call Metering.
+                0 - Per route (exchange).
+                1 - Per extension.
+        D10: A-Number request from MFC.
+        The extension is allowed or not allowed to request an A-number from
+        the MFC trunk (swiss).
+                0 - Not allowed.
+                1 - Allowed.
+        D11: A-Subscriber charged
+        Specify if the A-number will be charged or not (only for Swiss MFC
+        DID trunks)
+                0 - Normal.
+                1 - Not charged.
+        D12: Individual do-not-disturb (DND).
+        States if an extension is authorized to initiate do-not-disturb.
+                0 - DND not permitted.
+                1 - Individual DND permitted.
+        A call to an Individual Do Not Disturb-marked extension will not be
+        signalled on the receiving extension. An Individual Do Not
+        Disturb-marked extension can still make outgoing calls in the
+        normal way.
+        D13: Deflect and SST to public destination.
+        States whether Deflect and SST is permitted or not to a public
+        destination.
+        This is also valid for deflect and SST request from CSTA
+        applications.
+                0 - Not permitted to Deflect and SST to public destination.
+                1 - Permitted to Deflect and SST to public destination.
+        D14: Hospitality class.
+        States the privilege classes.
+                0 - Normal extension.
+                1 - Room vacant.
+                2 - Room occupied.
+                3 - Service quarter (only for digital extensions).
+        D15: Collect call.
+        Specify if an extension is permitted to accept incoming collect
+        calls.
+                0 - Not allowed.
+                1 - Allowed.
+        D16: Unused
+        D17: Unconditional forced Gateway.
+        States whether all the calls to/from IP extensions will be
+        unconditionally forced gateway.
+                0 - No.
+                1 - Yes.
+        D18: Free seating permitted.
+        States whether the extension is permitted to use free seating.
+        Note, does not affect IP terminals with capability to logon/logoff.
+        This function is only supported by generic extensions.
+                0 - No.
+                1 - Yes.
+        D19: SMS permitted.
+        States whether the extension is permitted to use SMS.
+                0 - No.
+                1 - Yes.
+        D20: External Controlled Call distribution.
+        States whether the external controlled call distribution is
+        permitted.
+                0 - Normal call distribution.
+                1 - Call distribution controlled by external application.
+        NOTE, if value 1 is set the switch '--offered-time' has to be set
+        as well.
+        D21: Common authorization code forbidden.
+        States if common authorization code is forbidden (yes) to be used
+        from this user or not (no).
+                0 - No.
+                1 - Yes.
+        D22: Multiple terminal service busy option. This category is valid
+        at calls towards a user/person which has the multiple terminal
+        service.
+                0 - If any of the users/persons logged on terminals is busy, the
+                    user will be treated as busy.
+                1 - If any of the users/persons logged on terminals is busy, the
+                    system will ignore the user/person busy status and always
+                    try to seize the logged on terminals.
+                    If any of the users terminals replies busy during the
+                    seizure, the terminal and the user are treated as busy for
+                    the actual call.
+        D23: Extended services in Intrusion state.
+                0 - No extended services.
+                1 - Extended services: Parking, Inquiry and Single Step
+                    Transfer are permitted for the extension
+        D24: Call list deactivation forbidden.
+        Controls if the user is allowed to deactivate his/her call list.
+        This function is only supported by generic extensions.
+                0 - Call list deactivation is allowed.
+                1 - Call list deactivation is forbidden.
+        D25: Programming Of Group Do Not Disturb category.
+        This function is only supported by generic extensions.
+                0 - Extension does not have permission to activate/deactivate
+                    Group do not disturb.
+                1 - Extension has permission to activate/deactivate Group do
+                    not disturb.
+        D26: Automatic answer.
+        States whether the extension shall be ordered to answer
+        automatically or not. This function is only supported by Mitel SIP
+        extensions.
+                0 - Automatic answer will not be ordered.
+                1 - Automatic answer will be ordered.
+        D27D28: Transfer permission.
+        States whether call transfer of an outgoing PSTN call is permitted
+        or not, that is, a transfer of an internal call to a public
+        external line or to transfer a public external line in an outgoing
+        call to an internal extension.
+        Transfer category, that is, whether the extension is permitted to
+        transfer an internal call to a public external line in an outgoing
+        call, or to transfer a public external line in an outgoing call to
+        an internal extension. Authorization is required both for transfer
+        and for receipt of transferred outgoing public external calls. The
+        necessity of a category for this type of transfer depends on the AS
+        parameter.
+        As intruding party in an intrusion conference the user is permitted
+        to change the conference type from intrusion to normal. This is
+        done by executing call transfer in the intrusion conference. When
+        calling an extension conference leader and performing an intrusion
+        the intruding party is permitted to transfer a call into the
+        ongoing conference.
+                00 - Not permitted to accept transferred or to transfer
+                     outgoing external public calls to an internal party
+                     or this feature is not used in the system.
+                01 - Permitted to transfer outgoing external calls.
+                02 - Permitted to accept transferred outgoing external calls.
+                     (Above can be altered through command ASPAC, PARNUM=67).
+                04 - Not used.
+                08 - Permitted to transfer a call into intrusion conference.
+                     (If intrusion conference is set, consider global_traffic_data
+                     switch --conference-release).
+        The value D27D28 is the summation of the above categories.
+        D29: Answer Handling
+        States whether the extension shall be ordered to answer by a user
+        or by an external application (CSTA).
+                0 - Answer is controlled by the extension user.
+                1 - Answer is controlled by external application (CSTA).
+                    Tone shall be provided.
+        D30: Logoff restriction.
+        States whether the extension shall be fully restricted,
+        semi-restricted or not restricted.
+        This function is only supported by Mitel SIP extensions (see CPI
+        doc. Extension Functionality Comparison).
+                0 - Not restricted (permitted to logon/logoff, default).
+                1 - Semi-restricted. The first registration will be considered
+                    the default extension. The logoff key will then be labeled
+                    'TempUser', allowing temporary registration to own extension.
+                    Then an automatic registration back to the default extension
+                    will take place if the logoff key is pressed or after 4 hours.
+                2 - Fully restricted, logoff not allowed.
+        NOTICE: Change command for Log-off restriction in ext-serv is only
+        allowed from value 0.
+        NOTICE: This has no effect for VDP Login as this is a native phone
+        function.
+        The switch requires an argument. The argument is single-valued.
+
+     --ext-traf
+        States the traffic characteristics that an extension may generate.
+        A switch that has a collection of individual settings. Pad to
+        length is enabled for this switch. The digits have the following
+        meaning:
+        D1: Emergency Switching.
+        States whether the extension is blocked or open for traffic in an
+        emergency-switched PBX.
+                0 - Blocked.
+                1 - Open.
+        D2: Direct indialing.
+        States whether direct in-dialing traffic to the extension is
+        blocked or open.
+                0 - Blocked.
+                1 - Open.
+        D3: Rerouting Limitation.
+        States whether incoming calls towards the extension is permitted to
+        be rerouted. This facility makes it possible to avoid rerouting
+        calls to an extension, which can be, for example, a facsimile, even
+        though the incoming route is categorized to allow rerouting.
+                0 - No limitation.
+                1 - Rerouting blocked.
+        D4: Common abbreviated number class.
+        States the class of common abbreviated numbers that the extension
+        shall belong to. One 'abbreviated dialling common number' is
+        assigned to one or several classes in another command.
+                0..3 - Values.
+        D5D6: TCD Night.
+        D7D8: TCD Day.
+        States the TCD category in the number analysis that shall be mapped
+        to the extension during Day service(see D7D8) and Night service
+        (see D5D6). The category states the numbers the extension may dial.
+                00..14 - Values.
+                15 - Fully Open.
+        D9D10: Traffic Connect Class. States the traffic class in the
+        traffic group matrix to which the extension belongs. The value in
+        the interception point of the traffic group matrix between the
+        traffic class belongings of the A-party and B-party, decides
+        whether they are permitted to connect. (see operation directions
+        'Traffic connection matrix')
+                00..14 - Values.
+                15 - Fully Open.
+        Example:
+        The extension traffic category should be as follows:
+                - Extension open for all traffic in emergency switched PBX (1).
+                - Open for direct in-dialing traffic (1).
+                - The extension has no rerouting limitations (0).
+                - Permitted to use the common abbreviated numbers that have
+                  classified with the abbreviated number category 3 (3).
+                - During night service, the extension's TCD category 07
+                  should be used. Transmission by the extension during
+                  night service is then limited by TCD data in the number
+                  analysis in accordance with category 07. (07)
+                - During day service, the extension should be fully open (15).
+                - The extension should then be connected to A- and B-
+                  parties according to the prerequisites for traffic
+                  connect class 14 (14).
+        gives: '--ext-traf 1103071514'
+        The switch requires an argument. The argument is single-valued.
+
+     --forced-disconnect-time
+        Forced disconnect Time. Range : 0, 60 - 65535
+        States if the forced disconnect Timer value in Sec.
+        The switch requires an argument. The argument is single-valued.
+
+     --idle-delay-time
+        Idle delay time, range: 0 - 10 seconds, default: 0.
+        The delay time needed by the mobile network between two calls. Used
+        by remote extensions over SIP and ISDN when needed.
+        Example: A RXN is the only member of a hunt group that is
+        configured so that the member is never unavailable. The member does
+        not answer the call and after the ring timeout the next call is
+        accepted with delay set by this timer.
+        The switch requires an argument. The argument is single-valued.
+
+     -i, --initiate
+        Initiate some settings. I.e. make initial configuration of an item
+        (or several items).
+        The switch takes no arguments.
+
+     --offered-time
+        The timeout for the 'offered' state in seconds. If the time is zero
+        (0), then calls to the extension never enter the 'offered' state.
+        If non-zero all calls to the extension enter the 'offered' state
+        and waits for actions (for instance from CSTA). If no action is
+        received within the time specified, the call processing continues.
+        The argument must be an integer in the range 0 to 60. The default
+        if the switch is omitted is zero (0).
+        The switch requires an argument. The argument is single-valued.
+
+     -p, --print
+        Print all or some settings. I.e. print configuration of an item,
+        several items, or all items.
+        The switch takes no arguments.
+
+     -s, +s, --sort, ++sort
+        Specify sorting criteria for printout. If no sorting is specified,
+        the printout is unsorted. If sort switch is given without
+        arguments, the printout will be sorted on CSP
+        -s and --sort specify ascending sort order. +s and ++sort specify
+        descending sort order. Possible values are: 'CDIV', 'CNNLOG',
+        'CSP', 'CSPNAME', 'FORCEDDISCONNECT', 'IDLEDELAYTIME', 'LEGACY',
+        'NPRES', 'OFFEREDTIME', 'ROC', 'SERV', 'TRAF', 'cdiv', 'cnnlog',
+        'csp', 'cspname', 'forceddisconnect', 'idledelaytime', 'legacy',
+        'npres', 'offeredtime', 'roc', 'serv', 'traf'.
+        The switch takes an optional argument. The argument is
+        single-valued.
+
+     -v, --verbose
+        Turn on verbose output (i.e. progress information) to standard
+        error.
+        The switch takes no arguments.
+
+     -V, --verbose-to-syslog
+        Turn on verbose logging to syslog (usually to /var/log/messages).
+        The switch takes no arguments.
+
+
+DESCRIPTION
+     The command is used to change, erase, initiate and print common user
+     data.
+
+EXAMPLES
+     Change the common service profile 10 to have the following --ext-serv
+     categories:
+     Not permitted to initiate automatic callback. Permitted to initiate
+     transmission of call waiting. Permitted to see a Call Waiting
+     notification from another extension. Not permitted to here the Call
+     Waiting notification as C-party. Permitted to initiate intrusion and
+     open for intrusion. Priority of intrusion 2. The extension is not
+     permitted to initiate malicious call tracing. Not permitted to use the
+     function Manual Message Waiting. Calls are to be metered per
+     extension. The extension is not permitted to do A-Number request from
+     MFC. The extension does not have A-Subscriber charged. The extension
+     is permitted to use Individual Do Not Disturb. The extension shall
+     belong to the hospitality class Normal extension. Permitted to accept
+     collect calls. No conversion is done of the internal ring signal. Do
+     not force the calls from or to IP terminal to be GW. The extension is
+     not a free seating extension. The extension shall not have SMS
+     service. Common authorization code is not forbidden. For multiple
+     terminal service busy option, if any of the users terminals is busy
+     the user will be treated as busy. The extension does not have extended
+     service support in intrusion state. Call list deactivation is
+     allowed.Extension is allowed to program Group do not disturb. Answer
+     is controlled by the extension user. No logoff restriction.
+
+     and the following --ext-npres categories:
+     The request of A-number from the PSTN is not restricted for the
+     extension. The presentation of number is not restricted. CLIR per call
+     is not permitted. The directory number of the extension may be sent to
+     the public exchange. CLIR/COLR override not active. Never display
+     number from PSTN is not active. User identity shall be used for
+     incoming calls.
+        example% extension_profile -c --csp 10 --ext-serv\
+            011020001011001000000000000100 --ext-npres 1001000
+
+     Erase the common service profile 18.
+        example% extension_profile -e --csp 18
+
+     Create the common service profile 4 with:
+
+     Offered time category --offered-time:
+
+     Maximum time duration for the extension in offered state is 45 seconds.
+
+     And Call distribution is controlled by external application.
+
+     Traffic category --ext-traf:
+
+     The extension is blocked for initiation of traffic for an emergency
+     switched PBX. Open for indialing traffic from the public exchange. The
+     extension has no rerouting limitations. Permitted to use the common
+     abbreviated numbers that have the abbreviated number traffic class 3.
+     During night service the extension TCD-category 07 shall be used.
+     Digit transmission by the extension during night service is then
+     limited by the TCD-data in the number analysis in accordance with
+     category 07. During day service the extension shall be fully open. The
+     extension shall then be connected to A and B-parties according to the
+     prerequisites for traffic group 14.
+
+     Service category --ext-serv:
+
+     Permitted to initiate automatic call back towards another extension
+     and towards an external line. Permitted to initiate call waiting tone
+     towards another party and permitted to accept call waiting tone from
+     another extension and PBX operator as both B- and C-party. Permitted
+     to initiate intrusion and open for intrusion. Priority of intrusion 1.
+     No intrusion protection. The extension is permitted to initiate
+     malicious call tracing. Not permitted to use the function Manual
+     Message Waiting. Calls are to be metered per route. The extension is
+     not permitted to do A-Number request from MFC. The extension does not
+     have A-Subscriber charged. The extension is permitted to use
+     Individual Do Not Disturb. The extension shall belong to the
+     hospitality class Normal extension. Permitted to accept collect calls.
+     The internal ring signal is to be converted to the (call back) alarm
+     ring signal. Force the calls from or to IP terminal to be GW. The
+     extension is not a free seating extension. The extension shall not
+     have SMS service. Common authorization code is not forbidden. For
+     multiple terminal service busy option, if any of the users terminals
+     is busy the user will be treated as busy. The extension does not have
+     extended service support in intrusion state. Call list deactivation is
+     allowed. Extension is not allowed to program Group do not disturb. The
+     extension shall be permitted to both transfer and receive transferred
+     outgoing external public calls. Answer is controlled by external
+     application and Tone shall be provided
+
+     Diversion category --ext-cdiv:
+
+     External Follow me is not permitted. Follow me is not permitted. The
+     extension has permission to initiate diversion bypass. There is no
+     diversion on origin for internal extension. Diversion on origin, for
+     public external line, to a common position. Diversion on origin, for
+     private external line, to an individual position. No diversion bypass
+     for SMS messages. The extension is permitted to use the facility
+     direct diversion to the individual divertee position. The extension is
+     permitted to use the facility diversion on busy. The extension is
+     permitted to use the facility diversion on no-answer. The extension is
+     not permitted to use the Multi Directory Diversion.Remote Programming
+     of Diversions shall not be allowed.
+
+     Routing categories --ext-roc:
+
+     FRL category 2 is assigned. Forced account code is not required. LCR
+     number 2 is to be used. Class B is the authorization type for route
+     selection. Toll exchange category (AON) is not used.
+
+     Number presentation category --ext-npres:
+
+     The request of A-number from the PSTN is restricted for the extension.
+     The presentation of number is not restricted. CLIR per call is not
+     permitted. The directory number of the extension may be sent to the
+     public exchange. CLIR/COLR override is active only for public network.
+     Never display number from PSTN is not active. User identity shall be
+     used for incoming calls.
+        example% extension_profile -i --csp 4  --offered-time 45\
+            --ext-traf 0103071514 --ext-serv 212110100011001010010000000110\
+            --ext-cdiv 001021000110000 --ext-roc 222201 --ext-npres 0001200
+
+     Print the common service profile number 3.
+        example% extension_profile -p --csp 3
+
+     Print the common service profiles in the system that have the values
+     stated for the parameters --ext-traf, --ext-serv, and --ext-cdiv.
+        example% extension_profile -p --ext-traf 0103071514 --ext-serv\
+            212110100011001010010000000100 --ext-cdiv 001021000101000
+
+
+For more complete help type 'extension_profile --help-complete'.

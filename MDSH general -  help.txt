@@ -1,0 +1,182 @@
+MDSH> help
+ldd: warning: you do not have execution permission for `./help'
+
+You are allowed to enter the following MML commands:
+ac:  acbge acbgi acbgp accsp acgcc acgcp acgmc acgme acgmi acgmp acgre acgri
+     acpac acpap actne actni actnp
+ad:  adcdp adcoe adcoi adidp adine adini adipp
+as:  aspac aspap asuvp
+cb:  cbcac cbdap cbeli cbgme cbgmi
+ch:  chcme chcmi chcmp chgap chgce chgcp chgme chgmi chgmp chice chicp chrce
+     chrcp
+cs:  cstle cstli cstlp cstmp
+ex:  exadc exadp excac excap exccp exccs excuc exddp extee extei
+ic:  icfuc icfue icfui icfup icmwc icmwp icupi
+ir:  irpdp
+is:  isepe isepi isepp isfue isfui isfup
+it:  itcac itcuc itdap itnue itnui
+ks:  ksadc ksadp ksanc ksane ksani kscac kscap kschc kschp kscuc ksddp ksexe
+     ksexi ksfkc ksfkp ksmde ksmdi ksmdp
+lc:  lcdde lcddi lcddp lcipe lclde lcldi lcldp lcope lcopi lcopp lctdi lctdp
+     lctmp lcude lcudi
+mt:  mtlie mtlii mtlip mtsdc mtslc mtsle mtsli mtslp mtsre mtsri mtsrp mtssc
+     mtsse mtssi mtssp mtste mtsti mtstp
+nc:  nccoe nccoi nccop nccti ncgmc ncgme ncgmi ncgmp ncgrc ncgre ncgri ncgrp
+     ncgsp ncgte ncgti ncice ncici ncicp ncnoe ncnoi ncnop ncsgc ncsge ncsgi
+     ncsgp
+ns:  nscoe nscoi nsdap
+op:  opadc opcac opcap opcee opcei opcep opcgp opcgr opcgs opcoe opcoi opctp
+     opctr opcts opcuc opddp opdnc opdnp opere operi opidp opisp opiss opnee
+     opnei opnep oprsc oprsp opsae opsai opsap optsp
+pa:  paale paali paalp pacac pache pachi padap paedp pagie pagii pasae pasai
+ra:  racec racee racei racep radse radsi radsp ragac ragae ragai ragap ragme
+     ragmi ragmp ragpe ragpi ramde ramdi ramdp
+ri:  rianc riani rianp
+ro:  roape roapi roapp rocac rocai rocap rocde rocdi rocdp rodai rodap rodde
+     roddi roddp rodie rodii rodip rodne rodni rodnp rodrp roece roeci roecp
+     roedp roeqe roeqi rofcc rofcp ronde rondi rondp rorie rorii rorip rorne
+     rorni rornp rosce rosci roscp route rovne rovni rovnp
+se:  semie semii semip
+sp:  spexe spexi spexp
+tr:  trcbi trcfi trcoi trcri trcsi trddi trdip trdpe trdpi trdpp trexi tripi
+     trkri trksi trmbi trmee trmhi tromi tropi trpbi trpee trpei trpgi trpli
+     trrep trroi trrsi trrsp trtli trtri
+vm:  vmfue vmfui vmfup vmgee vmgei vmgep vmpoe vmpoi vmpop
+zo:  zodle zodli zodlp zopwc zotge zotgi zotgp
+
+
+You are allowed to enter the following Unix commands:
+account_code_close                   account_code_erase
+account_code_init                    account_code_open
+account_code_print                   alarm
+alarm_action                         alarm_board
+alarm_cfg                            alarm_input
+alarm_noticed                        alarm_output
+alarm_top                            amp_test
+app_server_tester                    auth_code
+block                                block_flags
+block_list                           blocking
+board_config                         board_list
+board_restart                        board_sw
+call_list                            call_list_profile
+call_trace                           callinfo_condcode_print
+callinfo_condcode_set                callinfo_file_to_file
+callinfo_file_to_sql                 callinfo_format_print
+callinfo_limit_print                 callinfo_limit_set
+callinfo_mask_print                  callinfo_mask_set
+callinfo_output_change               callinfo_output_info
+callinfo_output_set                  callinfo_qos_report_set
+callinfo_sql_to_file                 callinfo_status_print
+callinfo_status_set                  callinfo_tcp_print
+cat                                  config_mirror
+config_restore                       core_dump
+csta                                 csta_authentication
+cstagrep                             customer_report
+data_backup                          data_change
+data_info                            data_restore
+date                                 deblock
+debug_dump                           dect_cfp
+dect_extension                       dect_logging
+dect_rfp                             dect_system_id
+delay_seizure_list                   diagnostic_exception
+diagnostic_job_time                  diagnostic_print
+diversion                            diversion_common
+diversion_info                       diversion_system
+echo                                 emergency_location
+exchange_info                        extension
+extension_dnd_group                  extension_dnd_group_member
+extension_group                      extension_group_info
+extension_group_member               extension_group_profile
+extension_group_system               extension_info
+extension_key                        extension_option
+extension_option_info                extension_pickup_group
+extension_pickup_group_member        extension_procedure
+extension_profile                    extension_registration_distribution
+extension_text                       extension_unregistration
+external_database                    external_directory
+file_recode                          function_test
+global_traffic_data                  grep
+hexdump                              hw_message_send
+id                                   igw_route
+ip_domain                            ip_extension
+ip_extension_info                    ip_gatekeeper
+language                             language_strings_override
+language_strings_reread              less
+license_normalize                    license_print
+license_print_definition             license_report
+license_sls                          license_status
+lpq                                  lpr
+lprm                                 ls
+man                                  mdsh
+media_encryption_disable             media_encryption_enable
+media_encryption_print               media_gateway_config
+media_gateway_info                   media_gateway_interface
+media_gateway_load_sharing           media_gateway_start
+media_server                         media_server_message
+message_list                         message_name
+message_number                       message_send
+ms_media_sync                        multicast_test_echo
+multicast_test_echod                 multicast_test_recv
+multicast_test_send                  mxone_data
+mxone_software                       name
+number_conversion_end                number_conversion_initiate
+number_conversion_print              number_data_end
+number_data_initiate                 number_end
+number_initiate                      number_print
+number_vacant_conversion_end         number_vacant_conversion_initiate
+number_vacant_conversion_print       operator_common_queue
+parallel_ringing                     passwd
+phone_sw                             power_failure
+pu_add                               pu_info
+pu_name                              pu_number
+pu_ping                              pu_remove
+pwd                                  recorded_announcement_prompt
+recoverymode                         reload
+remote_extension                     resource_status
+restart                              ring_cadence
+ring_signal                          route_data_common
+rtp_resource                         sec_policy
+sip_domain                           sip_route
+sipgrep                              sleep
+sms_client_end                       sms_client_initiate
+sms_client_print                     sms_server_end
+sms_server_initiate                  sms_server_print
+som_proxy                            start
+status                               status_view
+streaming_data                       streaming_database
+switch_connection_end                switch_connection_initiate
+switch_connection_list               threads
+time_info                            trace
+traffic_matrix                       traffic_threshold
+transmission_matrix_data             trsp_connection
+trsp_info                            trsp_synchronization
+ts_about                             vacant_number
+vdp_data                             wc
+
+
+You are allowed to enter the following built in commands:
+<                 >                 >&                >>
+builtin           cd                diagnostic_state  exit_if_error
+export            false             function_trace    help
+job_kill          jobs              load_limit_get    load_limit_set
+mdsh_echo         memory_read       memory_write      mlock
+mml               set               setenv            source
+trigger           true              unix              |
+exit
+
+You have the following special environment variables:
+$_CIOR_LIM (read/write), $_OWN_LIM (read only), $_TMOUT (read/write)
+$_ECHO (read/write), $_EXIT (read/write), $_FORCED (read/write)
+$_MD_DEBUG (read/write), $_MD_BACKUP_OPTION (read/write)
+$_HISTORY_SIZE (read/write), $_OUTPUT (read/write), $_VERSION (read only)
+$_CMD_TIME, $_MML_CMD_TIME, $_UNIX_CMD_TIME, $_BUILTIN_CMD_TIME (read only)
+$_PID, $_PPID_MDSH_DEBUG_MASK (read/write), $_MML_PRINTOUT_DELAY (read/write)
+$_PWD (read only), $? (read only) $_MDSH_EXIT_AT_ERROR (read/write)
+$_MD_REMOTE_AMP_DB_SERVER (read/write)
+$-1 ,$0, $1, $2... (read only)
+
+
+At startup mdsh sources the file /etc/opt/eri_sn/mdsh.rc if it exists,
+then mdsh sources
+the file ${HOME}/.mdshrc if it exists.
+See "help mdsh" for more information.

@@ -1,0 +1,160 @@
+MDSH> extension_option -?
+NAME
+     extension_option - manage an extensions optional parameters.
+
+SYNOPSIS
+     extension_option [-v] [-V] -c -d m [--public-cli-number [x]]\
+         [--type-of-number x] [--public-cli-active x]\
+         [--public-cli-presentation-restricted x]
+     extension_option [-v] [-V] -e -d m [--public-cli-number [x]]\
+         [--public-cli-active x]
+     extension_option [-v] [-V] -i -d m [--public-cli-number [x]\
+         --type-of-number x [--public-cli-active x]\
+         [--public-cli-presentation-restricted x] [--update-semp-only]]
+     extension_option [-v] [-V] -p [-d M] [±s [x]]
+
+PARAMETERS
+     -c, --change
+        Change some settings. I.e. reconfiguration of an item (or several
+        items).
+        The switch takes no arguments.
+
+     -d, --dir
+        Directory number for an extension. The number must belong to a
+        number series for extensions. Accepted argument length is 2 to 20
+        digits.
+        The switch requires an argument.
+
+     -e, --erase
+        Erase some settings. I.e. deconfiguration of an item (or several
+        items).
+        The switch takes no arguments.
+
+     -i, --initiate
+        Initiate some settings. I.e. make initial configuration of an item
+        (or several items).
+        The switch takes no arguments.
+
+     -p, --print
+        Print all or some settings. I.e. print configuration of an item,
+        several items, or all items.
+        The switch takes no arguments.
+
+     --public-cli-active
+        Should 'Public CLI Number' be activated now.
+        The default, if the switch is not used, is No at initiation and
+        change, no change of state at erase.
+        Allowed values are: '1', 't', 'true', 'y', 'yes', '0', 'f',
+        'false', 'n', 'no'.
+        The switch requires an argument. The argument is single-valued.
+
+     --public-cli-number
+        Public CLI number sent to public party.
+        Number is used as A-party number at outgoing calls to the public
+        network. The number has to be a public number.
+        In erase command the parameter is used without any value to
+        indicate removal of the public-cli-number.
+        Accepted argument length is 1 to 20 digits.
+        The switch takes an optional argument. The argument is
+        single-valued.
+
+     --public-cli-presentation-restricted
+        Should 'Public CLI Number' presentation be restricted for public
+        parties.
+        The default, if the switch is not used, is No at initiation and
+        change, no change of state at erase.
+        Allowed values are: '1', 't', 'true', 'y', 'yes', '0', 'f',
+        'false', 'n', 'no'.
+        The switch requires an argument. The argument is single-valued.
+
+     -s, +s, --sort, ++sort
+        Specify sorting criteria for printout. If no sorting is specified,
+        the printout is unsorted. If sort switch is given without
+        arguments, the printout will be sorted on
+        -s and --sort specify ascending sort order. +s and ++sort specify
+        descending sort order. Possible values are: .
+        The switch takes an optional argument. The argument is
+        single-valued.
+
+     --type-of-number
+        Assign type of number for the public-cli-number.
+        Available types of numbers:
+                0 - Unknown public
+                1 - International
+                2 - National
+                3 - Network specific
+                4 - Local public
+                5 - Unknown private
+        Type of number 'Unknown Private' is only allowed to be used in
+        combination with parameter '--update-semp-only'.
+        The switch requires an argument. The argument is single-valued.
+
+     --update-semp-only
+        Only the semi-permanent data for 'Public CLI Number' is to be
+        updated.
+        Used when the system is reinstalled and the semi-permanent
+        Cassandra data is lost and has to be loaded into the system after a
+        new install. The input is received from command
+        'extension_option_info --format extension_option'.
+        The switch takes no arguments.
+
+     -v, --verbose
+        Turn on verbose output (i.e. progress information) to standard
+        error.
+        The switch takes no arguments.
+
+     -V, --verbose-to-syslog
+        Turn on verbose logging to syslog (usually to /var/log/messages).
+        The switch takes no arguments.
+
+
+DESCRIPTION
+     The command is used to change, erase, initiate and print
+     extension_options, primarily used for public CLI number.
+
+     The public CLI number data is stored in the Cassandra database. As the
+     Cassandra SemiP data holds information about currently active public
+     CLI number, it means that the active public CLI number data will not
+     be lost at system actions as system upgrade, LIM/system reload, power
+     failure and switch-over to standby server. Once the system is back in
+     service, the active public CLI number will be the same as before the
+     system action. Active public CLI number data are lost only at
+     re-installation of the system or at repair of a server including all
+     Cassandra data base in the system (e.g. 1 lim system with co-located
+     database).
+
+     When initiating public cli number data for an extension, the
+     administrator can specify if the public CLI number should become
+     active for the extensions by using the public-cli-active switch. If no
+     switch is specified their default setting will be used.
+
+     When changing public CLI number data for an extension, the
+     administrator can specify if changes should become active for the
+     extensions by using the public-cli-active switch.
+
+     When removing the public CLI number data for an extension, the
+     administrator needs to decide if the active public CLI number should
+     also be removed for the extension by using the public-cli-active
+     switch. If the active number is not removed it will remain after the
+     public CLI number data has been removed.
+
+EXAMPLES
+     An extension with directory number 1770 shall have public-cli-number
+     0856867000, this is a national number.
+        example% extension_option -i -d 1770 --public-cli-number\
+            0856867000 --type-of-number 2
+
+     An extension with directory number 1770 shall alter public-cli-number.
+        example% extension_option -c -d 1770 --public-cli-number\
+            0856867001
+
+     An extension with directory number 1770 shall erase the
+     public-cli-number, any active number will be removed
+        example% extension_option -e -d 1770 --public-cli-number\
+            --public-cli-active no
+
+     Print the options for extensions 1760, 4491 and 1770.
+        example% extension_option -p -d 1760,4491,1770
+
+
+For more complete help type 'extension_option --help-complete'.

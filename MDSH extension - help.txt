@@ -1,0 +1,547 @@
+MDSH> extension -?
+NAME
+     extension - manage an extension
+
+SYNOPSIS
+     extension [-v] [-V] -c -d m --emergency x
+     extension [-v] [-V] -c -d m [--backup-number [x]]\
+         [[--hotline-number x] --hotline-option x] [--csp x]\
+         [--csta-support x] [--customer x] [--free-on-second-line x]\
+         [--language-code x] [--max-call-cost [x]] [--secretary x]\
+         [--security-exception x] [--area-code [x]] [--blustar-client-model\
+         x] [--third-party-client x] [--video x] [--max-terminals x] [--amc\
+         x] [--feature-level x] [--virtual x] [--emergency x]
+     extension [-v] [-V] -e -d M
+     extension [-v] [-V] -i -d m --domain-name x --csp x [--emergency x]
+     extension [-v] [-V] -i -d m --domain-name x --csp x\
+         [[[--hotline-number x] --hotline-option x] [--backup-number x]\
+         [--csta-support x] [--customer x] [--free-on-second-line x]\
+         [--language-code x] [--max-call-cost x] [--max-terminals x]\
+         [--secretary x] [--security-exception x] [--area-code x]\
+         [--blustar-client-model x] [--third-party-client x] [--video x]\
+         [--amc x] [--feature-level x] [--edn x] [--virtual x]]
+     extension [-v] [-V] -i -d m -l x --csp x [--emergency x]
+     extension [-v] [-V] -i -d m -l x --csp x [[[--hotline-number x]\
+         --hotline-option x] [--backup-number x] [--csta-support x]\
+         [--customer x] [--free-on-second-line x] [--language-code x]\
+         [--max-call-cost x] [--max-terminals x] [--secretary x]\
+         [--security-exception x] [--area-code x] [--blustar-client-model\
+         x] [--third-party-client x] [--video x] [--amc x] [--feature-level\
+         x] [--edn x] [--virtual x]]
+     extension [-v] [-V] -p [-l x] --summary
+     extension [-v] [-V] -p [-l x] [-d M] [--csp x] [±s [x]]\
+         [--customer x] [--type s] [--format x]
+
+PARAMETERS
+     --amc
+        Category setting for Mitel Mobile Client (MMC) functionality.
+        Allowed values are: '1', 't', 'true', 'y', 'yes', '0', 'f',
+        'false', 'n', 'no'.
+        The switch requires an argument. The argument is single-valued.
+
+     --area-code
+        States the area code associated to the network domain. A regional
+        code to a certain domain can be set. It can be used to prefix the
+        dialed number before routing the call. Accepted argument length is
+        1 to 6 digits. In commands where this switch is optional the
+        default value is an empty string.
+        If used with the switch '--initiate', the switch requires an
+        argument. If used with the switch '--change', the switch takes an
+        optional argument and if no argument is given the default value is
+        used. The argument is single-valued.
+
+     --backup-number
+        States the backup answering position for a directory number
+        (--dir). The call will be re-directed to the backup answering
+        position (typically a public number) if the directory number cannot
+        be reached. Setting will have effect for marooned H.323 and SIP
+        extensions, but should be omitted for other extensions. Accepted
+        argument length is 2 to 20 characters. In commands where this
+        switch is optional the default value is an empty string.
+        If used with the switch '--initiate', the switch requires an
+        argument. If used with the switch '--change', the switch takes an
+        optional argument and if no argument is given the default value is
+        used. The argument is single-valued.
+
+     --blustar-client-model
+                STANDARD - BluStar SIP client (8000i is not licensed)
+                           ;messaging, voice, video (--video yes).
+                           BluStar on App(Iphone..) and 8000i requires video
+                           (--video yes) to be allowed registration.
+                           BluStar on PC now has plug-in on MS OCS/Lync included
+                           and the BluStar may still be limited to messaging only
+                           when switching to CTI (using for example a deskphone).
+                           The license enables one or many BluStar clients to be
+                           registered to the directory number (--dir).
+        NONE=default (NONE is used to remove setting using --change).
+
+        The switch requires an argument. The argument is single-valued.
+
+     -c, --change
+        Change some settings. I.e. reconfiguration of an item (or several
+        items).
+        The switch takes no arguments.
+
+     --csp
+        Each Common Service Profile (--csp) represent a combination of
+        characteristics for --ext-cdiv, --ext-npres, --ext-roc, --ext-serv
+        and --ext-traf. Argument must be an integer in the range 0 to 500.
+        The switch requires an argument. The argument is single-valued.
+
+     --csta-support
+        CSTA support category.
+        The digits have the following meaning:
+        D1: Mitel applications.
+                0 - Presence/status information only.
+                1 - Full support.
+        D2: Third party applications.
+                0 - No support.
+                1 - Presence/status information only.
+                2 - Full support.
+        If parameter is omitted, default value is 00.
+        Presence/status information allows monitoring and receiving all
+        events plus services used for getting status.
+        The switch requires an argument. The argument is single-valued.
+
+     --customer
+        Customer number for the extension. Customer 0 is the default
+        customer of the exchange. Argument must be an integer in the range
+        0 to 50000. For print operations the default is function dependent,
+        for all other operations the default is 0 (zero).
+        The switch requires an argument. The argument is single-valued.
+
+     -d, --dir
+        Directory number for an extension. The number must belong to a
+        number series for extensions. Accepted argument length is 2 to 20
+        digits.
+        The switch requires an argument.
+
+     --domain-name
+        States an identification label that defines a realm of
+        administrative autonomy, authority, or control. Accepted argument
+        length is 1 to 253 characters. The domain name label is limited to
+        63 characters.
+        The switch requires an argument. The argument is single-valued. The
+        domain name given here is the one that holds the server where the
+        extension shall register.
+
+     --edn
+        Category for Extra Directory Number (EDN) ONLY functionality.
+        Allowed values are: '1', 't', 'true', 'y', 'yes', '0', 'f',
+        'false', 'n', 'no'.
+        The switch requires an argument. The argument is single-valued.
+
+     --emergency
+        Category for virtual extension used for emergency call back.
+        Use this category for extensions appearing as emergency a-number.
+        This type of terminal can not be used to make regular calls.
+        Allowed values are: '1', 't', 'true', 'y', 'yes', '0', 'f',
+        'false', 'n', 'no'.
+        The switch requires an argument. The argument is single-valued.
+
+     -e, --erase
+        Erase some settings. I.e. deconfiguration of an item (or several
+        items).
+        The switch takes no arguments.
+
+     --feature-level
+        Category setting for extension feature or subscription level. Valid
+        only if the function feature or subscription levels are in use. To
+        determine this and to obtain level definitions use command
+        license_print_definition.
+
+        The level definition is the last part of the license tag, i.e if
+        the license tag is LICENSE-USER-BASIC, then use --feature-level
+        basic.
+
+        The switch requires an argument. The argument is single-valued.
+
+     --format
+        available formats:
+
+        l(ong)    - long format with all details (default)
+        s(hort)   - short format, omitting features and numbers
+        f(eatures)- short format and features
+        n(umbers) - short format and numbers
+
+        The switch requires an argument. The argument is single-valued.
+
+     --free-on-second-line
+        Category setting for free-on-second line functionality. This
+        function is only supported by Mitel SIP extensions (see CPI doc.
+        Extension Functionality Comparison).
+        The digits have the following meaning:
+                0 - Yes, but can be changed via terminal menu.
+                1 - No, but can be changed via terminal menu.
+                2 - Yes, can not be changed via terminal menu.
+                3 - No, can not be changed via terminal menu.
+        If parameter is omitted, default value is 0.
+        The switch requires an argument. The argument is single-valued.
+
+     --hotline-number
+        The parameter states the dial-string which automatically will be
+        dialled (by the system) when the user lifts the handset (direct
+        hot-line number) or after a delay (delayed hot-line number).
+        In the case when a PTS signal is to be detected, its place in the
+        complete number shall be stated with 'C', 'D' or 'E'.
+                C - Normal PTS. If timeout occurs the sending of digits
+                    is continued with the same type of register signalling
+                    as before the timeout.
+                D - PTS followed by DTMF sending of digits. If timeout
+                    occurs the sending of digits shall be continued with
+                    DTMF register signalling.
+                E - PTS followed by DTMF sending of digits. If timeout
+                    occurs, no more digits will be sent and the external
+                    line is disconnected.
+        For backward compatibility reasons 'A' is accepted as '*' and 'B'
+        is accepted as '#'.
+        For example the hotline number (auto dial string)
+        "0005C11E13D11675" means:Auto dial access code 00 and destination
+        code 05, and after the destination code a PTS is expected. When a
+        PTS is received or time out expires, next digits shall be 11. After
+        digits 11 a special PTS signal is expected followed by DTMF digit
+        sending, it time out expires the external line is disconnected. If
+        the PTS is received, next digits shall be 13. After digits 13 a PTS
+        signal is expected and if time out expires DTMF digit sending is
+        performed. After that next digits shall be 11675.
+        Accepted argument length is 1 to 26 characters.
+        The switch requires an argument. The argument is single-valued.
+
+     --hotline-option
+        States the hot-line option to be used. Omitted for normal
+        extensions. The meaning of the possible values are:
+                DIRECT  - Direct hot-line. The user with directory
+                          number (--dir) is a hot-line user only. The
+                          system will call a hot-line number after the
+                          hand set is lifted. (On basic SIP terminals
+                          the user must press a digit and dial. The system
+                          will convert the dialled number to the hot-line
+                          number. An Mitel 67xxi terminal will behave as
+                          intended as the command will configure the built
+                          in auto-dial feature)
+                DELAYED - Delayed hot-line. It is possible to use the terminal
+                          to dial a number during approx. 4 seconds. The timeout
+                          can be altered through command ASPAC, PARNUM=182.
+                          If no attempt to dial a number has been made, the
+                          system will call the hot-line number. (A basic SIP
+                          terminal will act as a normal terminal with this option.
+                          An Mitel 67xxi terminal will behave as intended as
+                          the command will configure the built in auto-dial
+                          timeout feature)
+                REMOVE  - Remove the hot-line (if initiated).
+        Possible values are: 'DELAYED', 'DIRECT', 'REMOVE'.
+        The switch requires an argument. The argument is single-valued.
+
+     -i, --initiate
+        Initiate some settings. I.e. make initial configuration of an item
+        (or several items).
+        The switch takes no arguments.
+
+     --language-code
+        States the language alternative. This parameter is used to overrule
+        the exchange language for an extension user.
+
+        Values:
+                ar      Arabic
+                cs      Czech
+                da      Danish
+                de      German
+                default System language
+                en      English
+                es      Spanish
+                es-MX   Latin American Spanish
+                et      Estonian
+                eu      Basque
+                fi      Finnish
+                fr      French
+                fy      Frisian
+                it      Italian
+                ko      Korean
+                nl      Dutch
+                no      Norwegian
+                pl      Polish
+                pt      Portuguese
+                pt-BR   Brasilian Portuguese
+                ro      Romanian
+                ru      Russian
+                sv      Swedish
+                zh      Chinese
+                zh-Hant Traditional Chinese
+        The switch requires an argument. The argument is single-valued.
+
+     -l, --lim
+        Lim number.
+        Syntax of argument is L where L is lim number [range: 1 - 124].
+        Example of valid syntax: 2
+        The switch requires an argument. The argument is single-valued.
+
+     --max-call-cost
+        States the maximum charging cost in pulses assigned a directory
+        number. When entered, the call will be disconnected once the entire
+        number of pulses is used. If not entered, calls have no cost
+        limitation for this directory number.
+        Prerequisite: The service provider must send a cost pulse tone in
+        public trunk calls.
+        If used with the switch '--initiate', the switch requires an
+        argument. If used with the switch '--change', the switch takes an
+        optional argument and if no argument is given the default value is
+        used. The argument is single-valued.
+
+     --max-terminals
+        Maximum number of terminals that are allowed to be logged on
+        simultaneously using one directory number. When it is used with the
+        switch '--change' the given value has to be greater than the
+        current value. Argument must be an integer in the range 1 to 8.
+        Default is 1.
+        The switch requires an argument. The argument is single-valued.
+
+     -p, --print
+        Print all or some settings. I.e. print configuration of an item,
+        several items, or all items.
+        The switch takes no arguments.
+
+     --secretary
+        Category setting for Boss-Secretary functionality.
+        Used to enable a 'secretary' to make function procedures for a
+        user, who has the secretary's directory number as answer position
+        in his personal number list. The secretary has similar capability
+        as an attendant. Allowed values are: '1', 't', 'true', 'y', 'yes',
+        '0', 'f', 'false', 'n', 'no'.
+        The switch requires an argument. The argument is single-valued.
+
+     --security-exception
+        The switch manages exceptions for central enforcement of VoIP
+        security. All extensions handled by command "extension" have to be
+        treated the same, e.g. if the sip terminals should use TLS then all
+        extensions (by the "extension" command) in the system must have the
+        value 'no' for this switch. If "sec_policy" has value
+        'ALL_SECURE+EXC_EXT':
+                no  - requires the terminal that supports it to logon with
+                      TLS and make encrypted calls (SRTP).
+                yes - the terminal has the option to logon insecure
+                      (without TLS) and make unencrypted calls (RTP)
+        If the switch is omitted, the default will be 'yes'. If there is no
+        "sec_policy" set this means that the security is set according to
+        the capabilities of the terminal and the available system security.
+        Prerequisites for security:
+        If TLS and/or SRTP shall be used, a permanent license file with
+        "VOIP SECURITY" enables (set to yes), must be loaded to the system.
+        Passwords should be set via command: auth_code_init. However, if
+        passwords is not set:
+                1. TLS authentication will use --dir as password for H.323
+                   and SIP terminals.
+                2. For H.323 terminals, if --security_exception 'no' ,
+                   then --dir will be used as password authentication for
+                   normal logon. Allowed values are: '1', 't', 'true', 'y', 'yes',
+        '0', 'f', 'false', 'n', 'no'.
+        The switch requires an argument. The argument is single-valued.
+
+     -s, +s, --sort, ++sort
+        Specify sorting criteria for printout. If no sorting is specified,
+        the printout is unsorted. If sort switch is given without
+        arguments, the printout will be sorted on DIR
+        -s and --sort specify ascending sort order. +s and ++sort specify
+        descending sort order. Possible values are: 'AMC', 'AREACODE',
+        'BACKUP', 'BLUSTAR', 'CSP', 'CUSTOMER', 'DIR', 'EDN',
+        'FEATURELEVEL', 'FREEONSECONDLINE', 'HOTLINENUMBER',
+        'HOTLINEOPTION', 'LANGUAGE', 'LIM', 'MAXCALLCOST', 'MAXTERMINALS',
+        'SECRETARY', 'SECURITYEXCEPTION', 'THIRDPARTYCLIENT', 'VIDEO',
+        'amc', 'areacode', 'backup', 'blustar', 'csp', 'customer', 'dir',
+        'edn', 'featurelevel', 'freeonsecondline', 'hotlinenumber',
+        'hotlineoption', 'language', 'lim', 'maxcallcost', 'maxterminals',
+        'secretary', 'securityexception', 'thirdpartyclient', 'video'.
+        The switch takes an optional argument. The argument is
+        single-valued.
+
+     --summary
+        Print a summary.
+        The switch takes no arguments.
+
+     --third-party-client
+        States whether a third party client is permitted to be used,
+        default (if missing) is FALSE = not permitted.
+        Allowed values are: '1', 't', 'true', 'y', 'yes', '0', 'f',
+        'false', 'n', 'no'.
+        The switch requires an argument. The argument is single-valued.
+
+     --type
+        Type(s) of extensions to print. Allowed types are:
+
+        all       - all extensions (default)
+        edn       - edn only extensions
+        dect      - extensions of specific terminal type dect
+        h323      - extensions of specific terminal type h323
+        remote    - extensions of specific terminal type remote
+        sip       - extensions of specific terminal type sip
+        typed     - all terminal type specific extensions
+        virtual   - extensions without specific terminal type
+        undefined - extensions not yet usable
+        emergency - extensions use for emergency call back
+
+        Note that an extension must be terminal type specific, edn or
+        virtual or assigned a feature level to be used. Emergency
+        extensions can only be used for emergency call back
+        Unspecified extensions can be made usable by changing to virtual or
+        assigning a type with i.e. command ip_extension.
+
+        The switch requires an argument. The argument can be a comma
+        separated sequence.
+
+     -v, --verbose
+        Turn on verbose output (i.e. progress information) to standard
+        error.
+        The switch takes no arguments.
+
+     -V, --verbose-to-syslog
+        Turn on verbose logging to syslog (usually to /var/log/messages).
+        The switch takes no arguments.
+
+     --video
+        Category setting for video functionality. Allowed values are: '1',
+        't', 'true', 'y', 'yes', '0', 'f', 'false', 'n', 'no'.
+        The switch requires an argument. The argument is single-valued.
+
+     --virtual
+        Category for virtual extension functionality.
+        Use this category for extensions without specific terminal type.
+        Note that unspecified extensions can not be used.
+
+        Allowed values are: '1', 't', 'true', 'y', 'yes', '0', 'f',
+        'false', 'n', 'no'.
+        The switch requires an argument. The argument is single-valued.
+
+
+DESCRIPTION
+     The command is used to change, erase, initiate and print individual
+     user data.
+
+EXAMPLES
+     An extension with directory number 1767 shall alter the common service
+     profile to 142.
+        example% extension -c -d 1767 --csp 142
+
+     An extension with directory number 4491 shall alter the language to
+     Italian.
+        example% extension -c -d 4491 --language-code it
+
+     An extension with directory number 1232 shall alter the common service
+     profile to 27, the language to Spanish and maximum charging cost to
+     1250.
+        example% extension -c -d 1232 --csp 27 --language-code es\
+            --max-call-cost 1250
+
+     Alter extension 3801 to be a delayed hot-line extension with
+     non-dialled connection number 0005C11E13D11675. The translated number
+     consists of the route access code 00 and destination code 05 and after
+     the destination code a PTS is expected. When a PTS is received or time
+     out expires the next digits shall be 11. After digits 11 a PTS signal
+     is expected followed by DTMF digit sending. If time out expires the
+     external line is disconnected. If the PTS is received the next digits
+     shall be 13. After digits 13 a PTS signal is expected and if time out
+     expires DTMF digit sending is performed. After that the next digits
+     shall be 11675.
+        example% extension -c -d 3801 --hotline-option DELAYED\
+            --hotline-number 0005C11E13D11675
+
+     Erase the directory numbers 5235-5240.
+        example% extension -e -d 5235..5240
+
+     Erase the backup destination number value for directory number 5235.
+        example% extension -c -d 5235 --backup-number
+
+     Initiate a directory number for an extension with number 4525 in LIM
+     3. The extension categories for TRAF, SERV, CDIV, ROC and NPRES are to
+     be those stated in the common service profile 7. Exchange language is
+     used. Maximum charging cost (pulses) assigned is 500.
+        example% extension -i -d 4525 -l 3 --csp 7 --max-call-cost 500
+
+     Initiate a directory number for an extension with number 4530 in LIM
+     2. The extension categories for TRAF, SERV, CDIV, ROC and NPRES are to
+     be those stated in the common service profile 5. Exchange language is
+     used. Area Code used is 464.
+        example% extension -i -d 4530 -l 2 --csp 5 --area-code 464
+
+     Initiate a directory number for an extension with number 4491 in LIM
+     3. The extension categories for TRAF, SERV, CDIV, ROC and NPRES shall
+     be those stated in the common service profile 5. The extension is
+     affiliated to customer 13. The selected language for the extension is
+     to be German.
+        example% extension -i -d 4491 -l 3 --csp 5 --customer 13\
+            --language-code de
+
+     Initiate a directory number for an extension with number 4421 in LIM
+     1. The extension categories for TRAF, SERV, CDIV, ROC and NPRES are to
+     be those stated in the common service profile 8. The extension will
+     have a special purpose option with a non-dialled number as 1432.
+        example% extension -i -d 4421 -l 1 --csp 8 --hotline-option\
+            DIRECT --hotline-number 1432
+
+     Initiate a directory number for an extension with number 4422 in LIM
+     1. The extension categories for TRAF, SERV, CDIV, ROC and NPRES are to
+     be those stated in the common service profile 8. The extension shall
+     support dual forking.
+        example% extension -i -d 4422 -l 1 --csp 8 --max-terminals 2
+
+     Initiate a directory number for an extension with number 4423 using
+     the --domain-name switch. The possible ip-range is in domain
+     branch-office-3 and the server where the extension shall register is
+     included in this domain. The extension categories for TRAF, SERV,
+     CDIV, ROC and NPRES are to be those stated in the common service
+     profile 8.
+        example% extension -i -d 4423 --domain-name branch-office-3\
+            --csp 8
+
+     Server farm case: Initiate a directory number for an extension with
+     number 4423 using the --domain-name switch. The possible ip-range is
+     in domain branch-office-3, but the server where the extension shall
+     register is NOT included in this domain. The extension categories for
+     TRAF, SERV, CDIV, ROC and NPRES are to be those stated in the common
+     service profile 8.
+        example% extension -i -d 4423 --domain-name DEFAULT --csp 8
+
+     Initiate a directory number for an extension with number 4525 in LIM
+     3. The extension categories for TRAF, SERV, CDIV, ROC and NPRES are to
+     be those stated in the common service profile 7. Exchange language is
+     used. The home area code assigned is 464.
+        example% extension -i -d 4525 -l 3 --csp 7 --area-code 464
+
+     Initiate a directory number for an extension with number 4526 in LIM
+     3. The extension categories for TRAF, SERV, CDIV, ROC and NPRES are to
+     be those stated in the common service profile 6. Exchange language is
+     used. The home area code assigned is 464. Two terminals shall be
+     allowed to register on the directory number. A BluStar client of
+     standard model shall be possible to use, and video shall be permitted.
+        example% extension -i -d 4526 -l 3 --csp 6 --area-code 464\
+            --max-terminals 2 --blustar-client-model STANDARD --video yes
+
+     Initiate a directory number for an extension with number 4526 in LIM
+     15. The extension categories for TRAF, SERV, CDIV, ROC and NPRES are
+     to be those stated in the common service profile 7. Exchange language
+     is used. Two terminals shall be allowed to register on the directory
+     number. Non Aastra/Mitel terminals (third-party-client) shall be able
+     to register with 4526.
+        example% extension -i -d 4526 -l 15 --csp 7 --max-terminals 2\
+            --video yes --third-party-client yes
+
+     Initiate an extension used for emergency calls in a system that is NOT
+     using feature levels.
+        example% extension -i --emergency yes -d 5556 -l 1 --csp 1
+
+     Feature level example.
+     Initiate extension 3355 with feature level premium. This also results
+     in seizing license FEATURE-USER-PREMIUM
+        example% extension -i -d 3355 -l 1 --csp 1 --feature-level\
+            premium
+
+     Print the category information for extensions 4498 and 4499.
+        example% extension -p -d 4498,4499
+
+     Print the directory number data for extensions 4100-4328.
+        example% extension -p -d 4100..4328
+
+     Print the generic extension directory numbers assigned to the common
+     service profile 15.
+        example% extension -p --csp 15
+
+
+For more complete help type 'extension --help-complete'.

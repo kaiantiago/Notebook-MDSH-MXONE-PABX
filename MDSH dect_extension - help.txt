@@ -1,0 +1,153 @@
+MDSH> dect_extension -?
+NAME
+     dect_extension - manage authentication key for dect extension.
+
+SYNOPSIS
+     dect_extension -e -d M
+     dect_extension -i -d x --authentication-par x [--send-duration x]
+     dect_extension -i -d x --ipei x --authentication-key x\
+         [--send-duration x]
+     dect_extension -p [-d M] [--authentication-details]
+
+PARAMETERS
+     --authentication-details
+        Print the 'encrypted authentication parameter' for a dect extension
+        directory number. The parameter is created when a dect extension
+        performs access right procedure, after which it is stored in both
+        the handset and in the exchange.
+        The switch takes no arguments.
+
+     --authentication-key
+        States the authentication key data to be associated with --ipei and
+        -d. The authentication key is imperative for dect extension. It is
+        used by the dect extension to execute location registration
+        procedure. Accepted argument length is 1 to 8 digits.
+        The switch requires an argument. The argument is single-valued.
+        NOTICE: Minimum 4 digits are required by DT4x0 and DT4x2.
+
+     --authentication-par
+        States the 'encrypted authentication parameter' to be associated
+        with -d. The parameter is created when a dect extension performs
+        the access right procedure, after which it is stored in both the
+        handset and in the exchange. This parameter shall only be used to
+        re-initiate data for dect extension that have performed the access
+        right procedure.
+        Accepted argument length is 48.
+        The switch requires an argument. The argument is single-valued.
+
+     -d, --dir
+        Directory number for an extension. The number must belong to a
+        number series for extensions. Accepted argument length is 2 to 20
+        digits.
+        The switch requires an argument.
+
+     -e, --erase
+        Erase some settings. I.e. deconfiguration of an item (or several
+        items).
+        The switch takes no arguments.
+
+     -i, --initiate
+        Initiate some settings. I.e. make initial configuration of an item
+        (or several items).
+        The switch takes no arguments.
+
+     --ipei
+        States the 'international portable equipment identity'. The first
+        12 digits in the parameter is a decimal representation of the
+        Portable Part's(PP) Ipei or the SIM-card's IPDI depending on which
+        type of PP is used. The last digit is a checksum in the range of
+        1-10, where the value 10 represented as an asterix(*).
+        Accepted argument length is 13.
+        The switch requires an argument. The argument is single-valued.
+
+     -p, --print
+        Print all or some settings. I.e. print configuration of an item,
+        several items, or all items.
+        The switch takes no arguments.
+
+     --send-duration
+        System will send Duration IE at locate accept for this user,
+        indicating that the registration needs to be renewed with in this
+        time.
+        Actual time is set with send-duration-time in command
+        dect_system_id, the send duration time must be set for this to work.
+
+        Verify that terminal has correct FW before setting this parameter.
+
+        Default value for this parameter is "no". Allowed values are: '1',
+        't', 'true', 'y', 'yes', '0', 'f', 'false', 'n', 'no'.
+        The switch requires an argument. The argument is single-valued.
+
+
+DESCRIPTION
+     The command is used to initiate, erase and print authentication data
+     for the stated directory number. The authentication data are used for
+     security control of a dect extension, and is imperative for a dect
+     extension when executing the location registration procedure. 'ipei'
+     is used during the access rights procedure. 'authentication-key' and
+     'ipei' are used when the portable accesses the system the first time.
+     During the access rights procedure (which is initiated from the
+     portable) the authentication key will be expanded to an encrypted
+     authentication parameter. For PPs with SIM-card the serial number
+     (IPDI) for the SIM-card is used instead of the serial number (IPEI)
+     for the PP, as the value in parameter IPEI. If the access rights
+     procedure has been performed, and the 'authentication-parameter is
+     known, this can be entered directly and there is no need to perform
+     the procedure again.
+
+     The --initiate switch orders creation of dir, 'ipei' and
+     authentication key or, dir and authentication details. When 'ipei' and
+     authentication key is used must 'on air' subscription be performed
+     from the terminal before initiation procedure is done.
+
+     The --erase switch orders removal of the authentication key for stated
+     directory numbers. Note that it is important to also remove the
+     authentication key from the portable part (PP), in order to avoid
+     problems with conflicting authentication keys in the future, when a
+     new PP tries to activate the old authentication key in the system.
+
+     The --print switch orders a printout of authentication key data for
+     stated directory numbers. 'authentication-key' and 'ipei' are used
+     when the portable accesses the system for the first time. During the
+     access rights procedure (which is initiated from the portable) the
+     authentication key will be expanded to an encrypted authentication
+     parameter. 'authentication-key' and 'ipei' are then removed from the
+     system. If the parameter 'authentication-details' is omitted, the
+     'authentication-key' and 'ipei' of the directory number(s) will be
+     printed. If the parameter 'authentication-details' is included, the
+     authentication parameter, is printed, and data will only be printed
+     for the dect extensions which have performed the access rights
+     procedure.
+
+EXAMPLES
+     Initiate authentication key data 01234567 for a dect extension with
+     directory number 4496 and IPEI 0000707404102.
+        example% dect_extension -i -d 4496 --authentication-key\
+            01234567 --ipei 0000707404102
+
+     Initiate encrypted authentication parameter
+     1ABF694FD8742D7C100FB36F1ABF694FD8742D7C100FB36F
+        example% dect_extension -i -d 4496 --authentication-par\
+            1ABF694FD8742D7C100FB36F1ABF694FD8742D7C100FB36F
+
+     Initiate with send-duration active and encrypted authentication
+     parameter.
+     Verify that terminal has correct FW before executing.
+        example% dect_extension -i -d 4496 --authentication-par\
+            1ABF694FD8742D7C100FB36F1ABF694FD8742D7C100FB36F \
+             --send-duration yes
+
+     Remove the authentication key for a dect extension with directory
+     number 4496.
+        example% dect_extension -e -d 4496
+
+     Print authentication data for a dect extension with directory number
+     4496.
+        example% dect_extension -p -d 4496
+
+     Print authentication data details for a dect extension with directory
+     number 4496.
+        example% dect_extension -p -d 4496 --authentication-details
+
+
+For more complete help type 'dect_extension --help-complete'.

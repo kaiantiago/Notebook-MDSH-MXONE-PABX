@@ -1,0 +1,496 @@
+MDSH> extension_key -?
+NAME
+     extension_key - manage an extension key
+
+SYNOPSIS
+     extension_key [-v] [-V] -e -d M --line x
+     extension_key [-v] [-V] -e -d M --line-dir x
+     extension_key [-v] [-V] -e -d M --monitored-dir x
+     extension_key [-v] [-V] -e -d m --key X
+     extension_key [-v] [-V] -i --function x -d m --key x\
+         --key-sequence x [--line x] [--display-text x]
+     extension_key [-v] [-V] -i --function x -d m --key x --line-dir x\
+         [--line x] [--display-text x]
+     extension_key [-v] [-V] -i --function x -d m --key x\
+         --record-on-demand-uri x [--display-text x]
+     extension_key [-v] [-V] -i --function x -d m --key x\
+         --xml-on-demand-uri x [--display-text x]
+     extension_key [-v] [-V] -i --function x -d m --key x\
+         [--monitored-dir x] [--alert-type x] [--display-text x]\
+         [--key-off-call-list x] [--key-on-call-list x] [--key-sequence x]\
+         [--key-display-option x]
+     extension_key [-v] [-V] -i --function x -d m --line x [--key x]\
+         [--line-dir x] [--display-text x]
+     extension_key [-v] [-V] -p [--line-dir M] [±s [x]]
+     extension_key [-v] [-V] -p [--monitored-dir M] [±s [x]]
+     extension_key [-v] [-V] -p [[-d M] [--key x]] [±s [x]]
+
+PARAMETERS
+     --alert-type
+        Call alternative for functional key (FCN) with value MNS (multiple
+        representation and name selection).
+                0 - Not ringing (default)
+        RINGING OPTIONS WHILE OWN TERMINAL IS IDLE
+                1  - Ringing
+                2  - Ringing after delay
+                3  - Only the first ringing period (low volume)
+                4  - Ringing period after delay (low volume)
+                5  - Only the first ringing period (normal volume)
+                6  - Ringing period after delay (normal volume)
+        RINGING OPTIONS WHILE OWN TERMINAL IS IDLE OR IN A CALL
+                7  - Ringing [in call]
+                8  - Ringing after delay [in call]
+                9  - Only the first ringing period (low volume)[in call]
+                10 - Ringing period after delay (low volume)[in call]
+                11 - Only the first ringing period (normal volume)[in call]
+                12 - Ringing period after delay (normal volume)[in call]
+        The switch requires an argument. The argument is single-valued.
+        NOTICE: Values 5..12 only works with Mitel 6xxxi terminals.
+
+     -d, --dir
+        Directory number for an extension. The number must belong to a
+        number series for extensions. Accepted argument length is 2 to 20
+        digits.
+        The switch requires an argument.
+
+     --display-text
+        Text to be displayed on an Mitel SIP, DBC434, DBC444 and DBC446
+        capable instrument. Accepted argument length is 1 to 24 characters.
+        The 'narrow' string will be converted to ISO 10646-UCS-4 (Unicode)
+        'wide' string. In this conversion the 'narrow' string can hold
+        'quoted' unicode numbers of unicode characters. A quote character
+        is used to switch between narrow text mode and unicode number mode
+        in the input 'narrow' string. In unicode number mode the numbers
+        are according to ISO 10646-UCS-4 see for instance
+        http://std.dkuug.dk/JTC1/SC2/WG2/
+        In unicode number mode the numbers are separated by space ' ', or
+        by semicolon ';'. The numbers in unicode number mode are decimal or
+        hexadecimal. (Hexadecimal numbers must begin with 0x.) The default
+        quote character is the percent sign '%', but that can be changed
+        using the environment variable $_MD_UNICODE_QUOTE_CHAR. To input
+        the quote character itself, the unicode number for the quote
+        character must be given in unicode number mode. (To input '%' if
+        '%' is quote character, insert '%37%'.)
+        Example: To input the fictitious German company name 'Üßü-GmbH'
+        (transcribed as Uessue-GmbH), with correct German characters,
+        without a German keyboard, the input would be
+        '%0xdc 0xdf 0xfc%-GmbH'.
+        The switch requires an argument. The argument is single-valued.
+
+     -e, --erase
+        Erase some settings. I.e. deconfiguration of an item (or several
+        items).
+        The switch takes no arguments.
+
+     --function
+        Function to be assigned to key
+        The meaning of the possible values are:
+                DMN - Diversion MoNitoring
+                EDN - Extra Directory Number
+                GMA - Group Member Availability
+                LOCK - Telephone lock key
+                MCT - Malicious Call Tracing
+                MNS - monitor call state information on directory numbers
+                      stated in the MNS switch
+                MOB - Mobile phone integration key
+                MXFER - MNS and transfer key
+                PEN - Personal Number. Key led on matches --key-on-call-list
+                      and key led off matches --key-off-call-list
+                PGM - pickup group monitoring
+                REC - VoIP recording
+                TNS - defines a speed dial number or functional procedure
+                      stated in the --key-sequence switch.
+                SCA - Shared Call Appearance (no bridging)
+                SCABR - Shared Call Appearance with bridging;
+                        enables barge in on a call in the same SCA group,
+                        i.e. intrude to create a conference
+                SXFER - Speed dial and transfer key. Transfer call to
+                        number stated in the --key-sequence switch
+                XML   - Send an XML order to system. i.e streaming
+                        This function is supported on 68xx terminals and later
+        Possible values are: 'DMN', 'EDN', 'GMA', 'LOCK', 'MCT', 'MNS',
+        'MOB', 'MXFER', 'PEN', 'PGM', 'REC', 'SCA', 'SCABR', 'SXFER',
+        'TNS', 'XML'.
+        The switch requires an argument. The argument is single-valued.
+
+     -i, --initiate
+        Initiate some settings. I.e. make initial configuration of an item
+        (or several items).
+        The switch takes no arguments.
+
+     --key
+        States the logical key number on the terminal, where the function
+        (according to --function) is loaded. For DBC 42x terminals see
+        'CONFIGURATION FILE FOR DBC42x', which defines system keys, which
+        will be given physical keys that are the same for a certain model.
+        The personal keys defined here, make use of the remaining set of
+        keys in a logical order.
+        For 67xxi terminals, --key N maps to 'expmod1 keyN' if
+        expansionmodule M670i or M675i is used. If no expansionmodule is
+        used the --key N will be mapped to different types of keys on the
+        terminal depending on the type of model according to
+        /etc/opt/eri_sn/mitel-terminal-mappings.conf
+        The switch requires an argument.
+
+     --key-display-option
+        Select what number is shown. When PGM key is pressed or on a CSTA
+        client application popup.
+        The phone with the PGM key has to have the capability to show the
+        number.
+        This setting is passed on the CSTA link to connected application.
+        The possible values are:
+                0 - No number is shown (feature is disabled)
+                1 - Show the calling party number when available
+                2 - Show the called party number when available
+                3 - Show calling and called party number when available
+                    (not supported in current phone software)
+        The argument must be an integer in the range 0 to 3. The default if
+        the switch is omitted is 1.
+        The switch requires an argument. The argument is single-valued.
+
+     --key-off-call-list
+        Key off call list. The number corresponds to the Call List number.
+        If the key indicator is on and the button is pressed this call list
+        becomes active and the key indicator is off.
+        Value:
+                0    - No active list
+                1..10 - list 1 to 10
+        The switch requires an argument. The argument is single-valued.
+
+     --key-on-call-list
+        Key on call list. The number corresponds to the Call List number.
+        If the key indicator is off and the button is pressed this call
+        list becomes active and the key indicator is on. If the monitored
+        call list matches this call list number, the key indicator will be
+        on.
+        Value:
+                1..10 - list 1 to 10
+        The switch requires an argument. The argument is single-valued.
+
+     --key-sequence
+        States a speed dial number, or a speed dial 'function procedure' on
+        a key with '--function TNS', '--function SXFER', '--function MNS'
+        or  '--function MXFER'. This is a string as it could be dialled on
+        the telephone, with digits, star and hash (0-9,+*#). For backward
+        compatibility reasons 'A' is accepted as '*' and 'B' is accepted as
+        '#'. If '#' is used the whole input has to be quoted like this
+        "*23*0#". + can be used to configure a number in E.164 format.
+         For 6700i/6800/6900 phones and function TNS then comma "," and "+"
+        have special meaning.
+        It is possible to configure a preset string of numbers followed by
+        a "+". This feature allows the phone to speed dial a prefix number
+        and then pause to let you enter the remaining phone number.A comma
+        can be used to insert 500ms pause in the number. Accepted argument
+        length is 1 to 200 characters.
+        The switch requires an argument. The argument is single-valued.
+
+     --line
+        States the logical terminal line.
+        1)Used to set physical lines (except for standard main line)
+          * --line 1,3,4 for --function SCA.
+          * --line 3,4 for --function EDN.
+        2)Logical lines are automatically allocated when using SCA and EDN
+        for --key
+        3)--line may be set for --function TNS (or SXFER) to choose
+        originating call line. (--line 1 is default)
+
+        Allocated lines are shown when printing.
+
+        The terminal type defines the limit on the maximum lines (physical
+        and logical) that can be configured on the phone. As for example
+        6800i series only have 2 physical keys, so physical line (--line 3
+        and 4) will not appear on this phone.
+        The switch requires an argument. The argument is single-valued.
+
+     --line-dir
+        States the directory number of a logical terminal line assigned
+        with --line.
+        Mandatory in case of --function EDN
+        Optional in case of --function SCA, in this case is the directory
+        number of the terminal used.
+        Accepted argument length is 2 to 20 digits.
+        The switch requires an argument.
+
+     --monitored-dir
+        In case of --function with value 'DMN', 'MNS' or 'MXFER'.
+        States the call state monitored directory number assigned to a
+        --key.
+        In case of --function with value 'GMA'.
+        States own member availability in monitored group number assigned
+        to a --key.
+        In case of --function with value 'PEN'.
+        States the Personal Number assigned to a --key.
+        Accepted argument length is 2 to 20 digits.
+        The switch requires an argument.
+
+     -p, --print
+        Print all or some settings. I.e. print configuration of an item,
+        several items, or all items.
+        The switch takes no arguments.
+
+     --record-on-demand-uri
+        Optional for --function REC.
+        States the URI to be associated with a record-on-demand key for SIP
+        6700i/6800/6900 terminals. The URI shall be RFC3986 compliant. Any
+        characters considered special by 6700i/6800/6900 must be escape
+        encoded (see 6700/6800/6900 XML API doc. For example & is escape
+        encoded by: &amp;).
+        It is recommended to use single quote, if double quote is used any
+        characters considered special by the command shell must also be
+        escape encoded (e.g. $ is escaped encoded by: \$)
+        Accepted argument length is 7 to 240 characters.
+        The switch requires an argument. The argument is single-valued.
+
+     -s, +s, --sort, ++sort
+        Specify sorting criteria for printout. If no sorting is specified,
+        the printout is unsorted. If sort switch is given without
+        arguments, the printout will be sorted on DIR
+        -s and --sort specify ascending sort order. +s and ++sort specify
+        descending sort order. Possible values are: 'ALERTTYPE', 'DIR',
+        'FUNCTION', 'KEY', 'KEYDISPLAYOPTION', 'KEYSEQUENCE', 'LINE',
+        'LINEDIR', 'MONITOREDDIR', 'alerttype', 'dir', 'function', 'key',
+        'keydisplayoption', 'keysequence', 'line', 'linedir',
+        'monitoreddir'.
+        Sorting on either keysequence, monitoreddir or linedir will result
+        in the same printout.
+        The switch takes an optional argument. The argument is
+        single-valued.
+
+     -v, --verbose
+        Turn on verbose output (i.e. progress information) to standard
+        error.
+        The switch takes no arguments.
+
+     -V, --verbose-to-syslog
+        Turn on verbose logging to syslog (usually to /var/log/messages).
+        The switch takes no arguments.
+
+     --xml-on-demand-uri
+
+        The switch requires an argument. The argument is single-valued.
+        Used with --function XML.
+        States the URI to be associated with a xml-on-demand key for SIP
+        terminals. The URI shall be RFC3986 compliant. Any characters
+        considered special by Mitel terminals must be escape encoded (see
+        68xxi XML API doc. E.g. & is escape encoded by: &amp;).
+        It is recommended to use singel quote, if double quote is used any
+        characters considered special by the command shell must also be
+        escape encoded (e.g. $ is escaped encoded by: \$)
+
+
+DESCRIPTION
+     The command is used to initiate, erase or print a dial-by-function key
+     (TNS), a Diversion MoNitoring key (DMN), a group member availability
+     key (GMA), a Mobile integration key (MOB), a telephone lock key
+     (LOCK), a speed dial transfer key (SXFER), a multiple representation
+     of a directory number on a key (MNS), a MNS key with transfer
+     functionality (MXFER), a Personal number key (PEN key), a Malicious
+     Call Trace key (MCT), a VoIP recording key (REC) or an string to send
+     to the system (XML) for a generic extension.
+     The command is also used to initiate, erase or print a Shared Call
+     Appearance number (SCA,SCABR) or an Extra Directory Number (EDN) or a
+     Pickup Group Monitored key (PGM) for SIP extension directory numbers.
+     For Aastra/Mitel SIP 6700i/6800/6900 extensions, a Record-on-demand
+     XML key (REC) can be initiated, erased or printed. When initiating
+     such a REC, --record-on-demand-uri can optionally be used. One REC can
+     be used to start recording and another REC to stop the recording or
+     just one REC can be used for both start and stop.
+     For Aastra H.323 terminals, only one REC is needed and does not use
+     --record-on-demand-uri.
+     The use of each branch of the command depends on the --function switch
+     value.
+     When initiating a TNS (or SXFER), the --key-sequence switch must be
+     used. The --line switch is optional and has default value 1. Only
+     6700i/6800/6900 terminals may associate the TNS to another line than 1.
+     When initiating a DMN, the --monitored-dir switch (and optionally the
+     --alert-type switch) must be used.
+     When initiating a GMA, the --monitored-dir switch must be used.
+     When initiating a MNS (or MXFER), the --monitored-dir switch (and
+     optionally the --alert-type switch) must be used. Multiple
+     representation means that a directory number belonging to a digital
+     key system telephone (ODN or ADN), an analog telephone set (primary or
+     ordinary), or a generic extension, can be represented in up to 40
+     extensions (DTS or generic extensions). This MNS functionality can be
+     initiated for any kind of extension
+     When initiating an EDN, the --line-dir is the Extra Line Directory
+     Number. An EDN may be initiated on one or more --key(s) or --line(s).
+     When initiating a SCA or SCABR, the --line-dir is the Shared Call
+     Appearance number. To set SCA/SCABR as main directory number, you may
+     omit --line-dir (as --line-dir is then assumed to be -d) and set
+     --line 1. --line represents the terminal's line number (Lx). An L1
+     number, will be represented on all predefined line keys on the
+     terminal.
+     To set SCA/SCABR as additional directory, --line-dir and either --line
+     or --key must be used. When SCA/SCABR number is represented on a
+     --key, then --line may be omitted, --line will then be calculated by
+     the command and shown on --print.
+     When initiating a PEN, the --monitored-dir, --key-off-call-list and
+     --key-on-call-list switch can be optionally used.--monitored-dir
+     extension must have call_list initiated.If --key-off-call-list is not
+     set the default is 0 and if --key-on-call-list is not set the default
+     is 1.
+     When initiating a PGM, the --alert-type switch and
+     --key-display-option switch are optional.
+
+     NOTE: Switch --line shall only be used with switch --erase if there is
+     no value for switch --key.
+
+EXAMPLES
+     Initiate an MNS key for the generic extension with directory number
+     41910. The logical key number is to be 11. The multiple represented
+     extension is to be directory number 41999. The call alternative is to
+     be not ringing. Not ringing, default for --alert-type.
+        example% extension_key -i -d 41910 --key 11 --function MNS\
+            --monitored-dir 41999
+
+     Initiate MNS key for the generic extension with directory number
+     41911. The logical key number is to be 12. The multiple represented
+     extension is to be directory number 42910. The call alternative is to
+     be ringing.
+        example% extension_key -i -d 41911 --key 12 --function MNS\
+            --monitored-dir 42910 --alert-type 1
+
+     Initiate MNS key for the generic extension with directory number
+     41911. The logical key number is to be 12. The multiple represented
+     extension is to be directory number 42910. The number to be called
+     when the key is pressed is 42555.
+        example% extension_key -i -d 41911 --key 12 --function MNS\
+            --monitored-dir 42910 --key-sequence 42555
+
+     Initiate a TNS key for the generic extension with directory number
+     41910. The logical key number is to be 14. The dial-by function number
+     is to be 42910.
+        example% extension_key -i -d 41910 --key 14 --function TNS\
+            --key-sequence 42910
+
+     Initiate MCT on key number 13 for the IP extension with the directory
+     number 43110.
+        example% extension_key -i -d 43110 --key 13 --function MCT
+
+     Initiate a PEN key for the generic extension with directory number
+     41910. The logical key number is to be 12. The personal number is to
+     be 42910.
+        example% extension_key -i -d 41910 --key 12 --function PEN\
+            --monitored-dir 42910
+
+     Initiate a PEN key on the personal number 42910. The logical key
+     number is to be 12.
+        example% extension_key -i -d 42910 --key 12 --function PEN\
+            --monitored-dir 42910\
+            extension_key -i -d 42910 --key 12 --function PEN
+
+     Initiate two additional SCA lines, line 3 and 4 (L3, L4) on an
+     Aastra/Mitel 6757i with number 42800. Status after initiation: L1, L2
+     has normal directory number 42910 and L3,L4 has SCA number 42800.
+        example% extension_key -i -d 42910 --line 3 --function SCA\
+            --line-dir 42800\
+            extension_key -i -d 42910 --line 4 --function SCA --line-dir\
+            42800
+
+     Initiate two additional SCA lines for directory number 42999, on
+     softkey 1 and 2 on an Aastra/Mitel 6739i with number 42222. Status
+     after initiation: L1,L2,L3 has main directory number 42999 and softkey
+     1,2 has SCA number 42222. (On the terminal, number 42999 will be
+     stored in the next uniquely available line repository per key. The
+     line used is shown on print and can be set explicitly here as well)
+        example% extension_key -i -d 42999 --key 1 --function SCA\
+            --line-dir 42222\
+            extension_key -i -d 42999 --key 2 --function SCA --line-dir\
+            42222
+
+     Initiate SCABR as main directory number 43110 (i.e the free-seating
+     number). Line 1 is the host for main directory number. Note that the
+     number on line 1 will be represented on all predefined line keys.
+     Aastra/Mitel 6739i has predefined line keys, L1, L2 and L3.
+        example% extension_key -i -d 43110 --line 1 --function SCABR
+
+     Initiate an EDN number 50001 to line 3 on an Aastra/Mitel 6739i (L3 is
+     a predefined key) on the main directory number 43110. This example is
+     a continuation of the above example. Status now is L1, L2 has main
+     number 43110 as SCABR and L3 has EDN number 50001
+        example% extension_key -i -d 43110 --line 3 --function EDN\
+            --line-dir 50001
+
+     Initiate a TNS key for the EDN number 50001 on line 3 on the main
+     directory number 43110 on an Aastra/Mitel 6739i. The logical key is to
+     be 1. The dial-by function number is to be 50005. When the key is
+     pressed 50001 is calling 50005. The key shall be displayed "Priv-50005"
+        example% extension_key -i -d 43110 --key 1 --line 3 --function\
+            TNS --key-sequence 50005 --display-text "Priv-50005"
+
+     Initiate a record-on-demand key on an Aastra/Mitel SIP 6739i with
+     directory number 44100. The terminal will replace $$SIPUSERNAME$$ with
+     its directory number.
+        example% extension_key -i -d 44100 --key 8 --function REC\
+            --record-on-demand-uri\
+            'http://203.0.113.1:80/VOIP?START&amp;OPN=$$SIPUSERNAME$$'\
+            --display-text "Record-on-demand"
+
+     Initiate a streaming key on an Aastra/Mitel SIP 6869i with directory
+     number 44100. The terminal will replace $$SIPUSERNAME$$ with its
+     directory number.
+        example% extension_key -i -d 44100 --key 8 --function XML\
+            --xml-on-demand-uri\
+            'http://$$PROXYURL$$:22222/StreamingMenu?user=$$SIPUSERNAME$$'\
+            --display-text "Streaming"
+
+     Initiate a speed dial transfer key on an Aastra/Mitel SIP 6869i that
+     allows to easily transfer calls to number 401.
+        example% extension_key -i -d 44100 --key 7 --function SXFER\
+            --key-sequence 401 --display-text "SXFER401"
+
+     Initiate a mobile integration key on a Mitel 6930 SIP phone
+        example% extension_key -i -d 44100 --key 8 --function MOB
+
+     Initiate a telephone lock key on an Aastra/Mitel 6869i SIP phone
+        example% extension_key -i -d 44100 --key 9 --function LOCK
+
+     Initiate PGM key for the generic extension with directory number
+     41911. The logical key number is to be 12. The call alternative is to
+     be ringing after delay. The key display option is to be showing
+     calling party number.
+        example% extension_key -i -d 41911 --key 12 --function PGM\
+            --alert-type 2 --key-display-option 1
+
+     Initiate a GMA key for the SIP extension with directory number 41911.
+     The logical key number is to be 4. The monitored group number is 77777.
+        example% extension_key -i -d 41911 --key 4 --function GMA\
+            --monitored-dir 77777
+
+     Erase the multiple represented number 18115 for generic extension
+     58900. (Erases both MNS and PEN)
+        example% extension_key -e -d 58900 --monitored-dir 18115
+
+     Erase multiple represented number 58999 on all generic extensions.
+     (Erases both MNS and PEN)
+        example% extension_key -e -d all --monitored-dir 58999
+
+     Erase line directory number 42800 to all associated SIP extensions.
+     (Erases either EDN or SCA/SCABR)
+        example% extension_key -e -d all --line-dir 42800
+
+     Erase the function on logical key number 1 for the generic extension
+     58918.
+        example% extension_key -e -d 58918 --key 1
+
+     Erase the function (SCA or SCABR) on the main directory number, hosted
+     on line 1 for the generic extension 58918. This will make the line
+     type change to a normal directory
+        example% extension_key -e -d 58918 --line-dir 58918 OR\
+            extension_key -e -d 58918 --line 1
+
+     Print the key information for directory numbers 41910 and 41911.
+        example% extension_key -p -d 41910,41911
+
+     Print the key information for directory number 41910 at key 3.
+        example% extension_key -p -d 41910 --key 3
+
+     Print the MNS and PEN monitoring directory number 42910.
+        example% extension_key -p --monitored-dir 42910
+
+     Print the EDN directory number 42910 or print the SCA/SCABR lines
+     subscribing to directory number 42910.
+        example% extension_key -p --line-dir 42910
+
+
+For more complete help type 'extension_key --help-complete'.

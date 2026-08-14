@@ -1,0 +1,95 @@
+MDSH> remote_extension -?
+NAME
+     remote_extension - manage a remote extension
+
+SYNOPSIS
+     remote_extension [-v] [-V] -e -d M [--customer x]
+     remote_extension [-v] [-V] -i -d x [--customer x] --remote-number x
+     remote_extension [-v] [-V] -p [-d M [--customer x]] [±s [x]]\
+         [--active-answering-position-info]
+
+PARAMETERS
+     --active-answering-position-info
+        If this switch is present the active answering position number will
+        be printed
+        The switch takes no arguments.
+
+     --customer
+        Customer number for the extension. Customer 0 is the default
+        customer of the exchange. Argument must be an integer in the range
+        0 to 50000. For print operations the default is function dependent,
+        for all other operations the default is 0 (zero).
+        The switch requires an argument. The argument is single-valued.
+
+     -d, --dir
+        Directory number for an extension. The number must belong to a
+        number series for extensions. Accepted argument length is 2 to 20
+        digits.
+        The switch requires an argument.
+
+     -e, --erase
+        Erase some settings. I.e. deconfiguration of an item (or several
+        items).
+        The switch takes no arguments.
+
+     -i, --initiate
+        Initiate some settings. I.e. make initial configuration of an item
+        (or several items).
+        The switch takes no arguments.
+
+     -p, --print
+        Print all or some settings. I.e. print configuration of an item,
+        several items, or all items.
+        The switch takes no arguments.
+
+     --remote-number
+        States the default public number associated to the remote
+        extension. The external destination code must be included in the
+        number. Accepted argument length is 2 to 25 digits.
+        The switch requires an argument. The argument is single-valued.
+
+     -s, +s, --sort, ++sort
+        Specify sorting criteria for printout. If no sorting is specified,
+        the printout is unsorted. If sort switch is given without
+        arguments, the printout will be sorted on DIR
+        -s and --sort specify ascending sort order. +s and ++sort specify
+        descending sort order. Possible values are: 'DIR',
+        'RXNDEFAULTNUMBER', 'dir', 'rxndefaultnumber'.
+        The switch takes an optional argument. The argument is
+        single-valued.
+
+     -v, --verbose
+        Turn on verbose output (i.e. progress information) to standard
+        error.
+        The switch takes no arguments.
+
+     -V, --verbose-to-syslog
+        Turn on verbose logging to syslog (usually to /var/log/messages).
+        The switch takes no arguments.
+
+
+DESCRIPTION
+     The command is used to erase, initiate or print a remote extension.
+     With service multiplicity active remote answering position can be
+     changed.
+     To get active answering position use switch
+     --active-answering-position-info. Or use resource_status command.
+
+     Active answering position is stored in semi-permanent data.
+     For more information see chapter "Handling of mxone_data and
+     mxone_global data", in System Database (Cassandra)- Description.
+
+EXAMPLES
+     Erase the remote extension 7661.
+        example% remote_extension -e -d 7661
+
+     Initiate a directory number 7661 as a remote extension, with
+     00916721220 as the public number (here 00 as external destination
+     code).
+        example% remote_extension -i -d 7661 --remote-number 00916721220
+
+     Print the remote extension 7661.
+        example% remote_extension -p -d 7661
+
+
+For more complete help type 'remote_extension --help-complete'.

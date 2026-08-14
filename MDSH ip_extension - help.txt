@@ -1,0 +1,208 @@
+MDSH> ip_extension -?
+NAME
+     ip_extension - initiate, erase or print an IP extension
+
+SYNOPSIS
+     ip_extension [-v] [-V] -c -d x --max-terminals x
+     ip_extension [-v] [-V] -e --mac-address x -d x
+     ip_extension [-v] [-V] -e --only x -d M
+     ip_extension [-v] [-V] -e --terminal-identity x -d x
+     ip_extension [-v] [-V] -e -d M
+     ip_extension [-v] [-V] -i -d m [--max-terminals x] [--protocol x]
+     ip_extension [-v] [-V] -i -d x --mac-address x
+     ip_extension [-v] [-V] -i -d x --terminal-identity x --uri x\
+         [--protocol x]
+     ip_extension [-v] [-V] -p [-d M]
+
+PARAMETERS
+     -c, --change
+        Change some settings. I.e. reconfiguration of an item (or several
+        items).
+        The switch takes no arguments.
+
+     -d, --dir
+        Directory number for an extension. The number must belong to a
+        number series for extensions. Accepted argument length is 2 to 20
+        digits.
+        The switch requires an argument.
+
+     -e, --erase
+        Erase some settings. I.e. deconfiguration of an item (or several
+        items).
+        The switch takes no arguments.
+
+     -i, --initiate
+        Initiate some settings. I.e. make initial configuration of an item
+        (or several items).
+        The switch takes no arguments.
+
+     --mac-address
+        States the MAC address of a device (12 or 17 characters).
+        Allowed format are 0123456789AB, 01:23:45:67:89:AB or
+        01-23-45-67-89-AB. When parameter is used the protocol will default
+        to SIP.
+        The switch requires an argument. The argument is single-valued.
+        NOTICE: This parameter is for prototyping only not for commercial
+        use.
+
+     --max-terminals
+        Maximum number of ip terminals that are allowed to be manually
+        logged on simultaneously using one directory number. When it is
+        used with the switch '--change' the given value has to be greater
+        than the current value. Argument must be an integer in the range 1
+        to 8, but the value can not exceed the value of --max-terminals
+        given in command extension. Default is 1.
+        The switch requires an argument. The argument is single-valued.
+
+     --only
+        Select to handle only this aspect or part. Possible values are:
+        'MANUAL', 'manual'.
+        The switch requires an argument. The argument is single-valued.
+
+     -p, --print
+        Print all or some settings. I.e. print configuration of an item,
+        several items, or all items.
+        The switch takes no arguments.
+
+     --protocol
+        Select which type of protocol used.
+        SIP - Permits SIP clients.
+        IP  - Permits both SIP and H323 clients.
+        Default: IP. The protocol is tied to license
+        Possible values are: 'IP', 'SIP'.
+        The switch requires an argument. The argument is single-valued.
+
+     --terminal-identity
+        States an RFC3261 compliant URI.
+        An IPv6 host address must be enclosed in square brackets. States
+        the terminal identity.
+        Accepted argument length is 7 to 100 characters. Format:
+        "xxx:user@host", where xxx is: 'sip'.
+        'user' must be equal to --dir for H323.
+        'user' must be RFC3261 compliant for SIP.
+        'host' host can be an IP address or host name. 'host' can be any
+        characters, there is no check if 'host' is valid. The host is the
+        contact address of the terminal (or the communication server)
+        representing the directory number.
+        If --uri is set to virtual extension(VE), then use format:
+        "sip:user@0.0.0.0"
+        The switch requires an argument. The argument is single-valued.
+
+     --uri
+        States an RFC3261 compliant URI.
+        An IPv6 host address must be enclosed in square brackets.
+
+        Virtual IP Extension(VIE):
+        "sip:username@0.0.0.0[;auto-park=yes|no | auto-clear=yes|no]"
+        A VIE acts as a normal extension except that it has no
+        host(terminal). VIE can be monitored via MNS key for call pickup.
+        Busy service, call pickup, also works towards a VIE.
+        URI-parameter auto-park=yes indicates that a call to a VIE
+        automatically will be answered and parked. This may be used for
+        members of GH in the feature, call parking pools.
+        URI-parameter auto-clear=yes indicates that a call to a VIE
+        automatically will be rejected with busy. This may be used for some
+        deflection cases.
+
+        SIP remote extension:
+        "rou:<xx[&yy]>;remote-number=<phone number>
+        [;multi-line-access=yes|no]"
+        , where  xx and yy must be a valid SIP route numbers (set by
+        command 'sip_route'). The primary route xx has a backup route yy.
+        If primary route fails, backup route is used.
+        The A-number conversion is not done for trunks. Internal partys use
+        -rexfromuri to form a-number. Remote number value is replacing the
+        ? in '-uristringX "sip:?@host"' used. Remote number can be any
+        phone number in the remote network.URI-parameter
+        multi-line-access=yes can be added to indicate that remote end
+        shall be treated as a multi line access terminal. Default is
+        multi-line-access=no. For more information see "Mobile and remote
+        extensions over SIP".
+
+        SIP remote extension:
+        "dest:<zz@remote-address>;remote-number=<phone number>
+        [;multi-line-access=yes|no]", where  zz must be a valid SIP route
+        destination number.
+        The A-number presentation is done as trunk number conversion for
+        the dest (and route). Remote number value is replacing the ? in
+        '-uristringX "sip:?@host"' used. Remote number can be any phone
+        number in the remote network.URI-parameter multi-line-access=yes
+        can be added to indicate that remote end shall be treated as a
+        multi line access terminal. Default is multi-line-access=no. For
+        more information see "Mobile and remote extensions over SIP".
+        Accepted argument length is 7 to 125 characters.
+        The switch requires an argument. The argument is single-valued.
+
+     -v, --verbose
+        Turn on verbose output (i.e. progress information) to standard
+        error.
+        The switch takes no arguments.
+
+     -V, --verbose-to-syslog
+        Turn on verbose logging to syslog (usually to /var/log/messages).
+        The switch takes no arguments.
+
+
+DESCRIPTION
+     The command is used to initiate a directory number as IP extension.
+     The directory number must be initiated as an extension.
+
+     The command can also be used to erase and print IP extension(s). If an
+     extension is forked the switches --terminal-identity or --only has to
+     be used to erase only one of the extensions. The switch
+     --terminal-identity should be used when erasing an automatic
+     registered terminal. The switch --only should be used to erase the
+     'normal/manual' terminal.
+     A remote extension over SIP can defined.
+     With service multiplicity active remote answering position can be
+     changed.
+
+     To get active answering position use resource_status command.
+     Active answering position is stored in semi-permanent data.
+     For more information see chapter "Handling of mxone_data and
+     mxone_global data", in System Database (Cassandra)- Description.
+
+EXAMPLES
+     Erase the directory number 501 with terminal identity
+     "sip:501@120.0.113.118".
+        example% ip_extension -e -d 501 --terminal-identity\
+            "sip:501@120.0.113.118"
+
+     Erase only the 'normal/manual' IP extension with number 7345
+        example% ip_extension -e -d 7345 --only manual
+
+     Initiate the directory number 2773 as an IP extension. As no -protocol
+     is set the command will initiate protocol SIP or IP depending on
+     available license or feature-level permission. The command will first
+     check for SIP license and then IP license.
+        example% ip_extension -i -d 2773
+
+     Initiate the directory number 654 as a virtual IP extension (VIE). As
+     VIEs can be monitored via MNS, it may serve as a group access number.
+     If a VIE is added to an internal huntgroup, calls to the VIE can be
+     queued
+        example% ip_extension -i -d 654 --terminal-identity\
+            "sip:654@0.0.0.0" --uri "sip:654@0.0.0.0"
+
+     Initiate the directory number 501 as a forking number using
+     configuration of sip_route -route 4
+        example% ip_extension -i -d 501 --terminal-identity\
+            "sip:501@120.0.113.118" --uri "rou:4;remote-number=501"
+
+     Initiate the directory number 501 as a remote extension using
+     configuration of sip route with destination 06
+        example% ip_extension -i -d 501 --terminal-identity\
+            "sip:501@120.0.113.118" --uri\
+            "dest:06@120.0.113.118;remote-number=+8123434"
+
+     Initiate the directory number 2554 as a mobile extension over SIP
+     trunk. A mobile phone can normally only be accessed as a single line
+     access terminal and if it used as a Solidus Agent device, it can only
+     be controlled as a single line access terminal. This characteristics
+     is defined by the actual parameter multi-line-access=no
+        example% ip_extension -i -d 2554 --terminal-identity\
+            "sip:2554@203.0.113.84" --uri\
+            "rou:8;remote-number=0101234562554;multi-line-access=no"
+
+
+For more complete help type 'ip_extension --help-complete'.
