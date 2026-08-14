@@ -345,4 +345,62 @@ As alterações feitas pelos comandos de ramais (extension, ip_extension, etc.) 
 1. Sempre execute data_backup manualmente: O administrador deve rodar o utilitário UNIX data_backup imediatamente após a criação ou alteração de ramais.
 2. Risco de Perda em Inicializações Regenerativas: Se o sistema sofrer uma falha e precisar restaurar dados antes que um backup novo tenha sido executado, a rotina de partida regenerativa ("Start After Data Restore") será forçada. Sob esse estado de recuperação, qualquer ramal que tenha sido adicionado ou modificado após o último backup gravado será completamente removido do PABX.
 
+## GLOSSÁRIO
+
+* Cassandra: O banco de dados ativo do sistema MX-ONE utilizado para armazenar os dados de intercâmbio (exchange data)
+Suas informações e tabelas relacionais são salvas e lidas em formato CQL (Cassandra Query Language)
+
+* CSP (Common Service Profile): Perfil de Serviço Comum que agrupa definições de categorias lógicas, permissões de tráfego e restrições de facilidades telefônicas atribuídas aos ramais do PABX
+
+* DECT Extension (Ramal DECT): Tecnologia de telefonia sem fio corporativa integrada
+O provisionamento de ramais DECT no terminal requer o registro do código físico IPEI (International Portable Equipment Identity) do portátil e uma chave de autenticação segura para viabilizar o registro de localização pelas antenas de rádio do sistema
+
+* Data Backup (data_backup): Utilitário administrativo UNIX que grava os dados de intercâmbio ativos das unidades de programa no sistema de arquivos local e extrai um snapshot CSV das tabelas do banco Cassandra
+É crucial para manter a consistência de dados do sistema, pois reinicializações inesperadas revertem o PABX ao último estado salvo
+
+* Extension (Ramal / Directory Number): A entidade lógica básica de usuário configurada no PABX associada a um número de diretório (Directory Number)
+Serve como a base estrutural que recebe as permissões de serviço (CSP) antes de ser vinculada a uma interface física ou protocolo de rede
+
+* IP Extension (Ramal IP): Ramal mapeado para operar através de redes de comutação de pacotes utilizando protocolos IP (como SIP ou H.323)
+Sua iniciação mapeia o ramal lógico a endereços MAC ou a identidades de terminal (URIs SIP)
+
+* IP PBX: Central telefônica privada que opera através da Internet (utilizando protocolo IP) para comutar e rotear chamadas simultâneas entre a rede telefônica convencional e terminais VoIP
+Diferencia-se de sistemas analógicos tradicionais por ser baseado primariamente em software e processar voz, vídeo, dados e integração de e-mail
+
+* LIM (Logical Interface Module): Módulo de Interface Lógica que atua como unidade de segmentação física ou lógica dentro do MX-ONE
+Os LIMs contêm seus próprios recursos de mídia e processamento e são cruciais para o balanceamento de carga e divisão de tráfego inter-gateway
+
+* MDSH (Mitel Directory Shell): Interface de linha de comando (CLI) baseada em UNIX que atua como o shell de logon associado às contas administrativas do MX-ONE Service Node
+Centraliza a administração do sistema através de comandos UNIX nativos, comandos específicos do MX-ONE, comandos MML e comandos embutidos de shell
+
+* MGU (Media Gateway Unit): Gateway de mídia baseado em hardware integrado ao servidor MX-ONE que processa a comutação de canais de voz físicos e digitais
+Possui seu próprio sistema operacional Linux bootável e firmware de aplicação
+
+* MNS (Multiple Representation / Multiple Name Selection): Facilidade que permite que um número de ramal base seja representado em teclas físicas de múltiplos aparelhos (até 40 ramais digitais ou genéricos) para monitoramento de chamadas, com diversas opções de prioridade de toque e sinalização (alert-type)
+
+* Media Server (MS): Gateway de mídia baseado puramente em software instalado no próprio Service Node que executa tarefas de comutação multimídia e alocação de recursos de áudio (RTP)
+
+* MML (Man-Machine Language): Linguagem padrão de comandos legados de centrais telefônicas herdada pelo shell MDSH, estruturada em blocos de tarefas específicos como ex: (ramais), ad: (dados de rede) e tr: (transmissão/sincronismo)
+
+* PABX / PBX (Private Branch Exchange): Sistema de telefonia privado de nível corporativo projetado para estabelecer conexões internas gratuitas entre colaboradores e comutar acessos telefônicos externos com a rede pública (PSTN) através de linhas físicas e troncos contratados
+
+* Program Unit (PU): Unidade de programa contínuo de controle do MX-ONE Service Node
+Cada PU possui número e nome únicos, executa tarefas de forma contínua em segundo plano, comunica-se via mensagens diretas com outras PUs e pode passar por rotinas de reinicialização (restart) ou recarga (reload) sem afetar o sistema operacional Linux subjacente
+
+* Remote Extension (Ramal Remoto): Configuração de ramal móvel que redireciona chamadas destinadas ao ramal corporativo para um número telefônico de destino externo à empresa (como o número de celular do colaborador)
+
+* SCA / SCABR (Shared Call Appearance): Funcionalidade específica para ramais SIP que permite mapear e compartilhar uma linha telefônica idêntica ou número de diretório em teclas de múltiplos aparelhos físicos na rede
+
+* SIP (Session Initiation Protocol): Protocolo de sinalização de rede IP estruturado em sequências padronizadas de requisição e resposta
+É responsável por estabelecer, controlar e finalizar sessões multimídia em tempo real (voz, vídeo e chats de dados)
+
+* Service Node (SN): O servidor físico ou virtual onde o sistema operacional Linux e a suíte principal de softwares do MiVoice MX-ONE são instalados e executados
+
+* TNS (Dial-by-Function): Tecla física programada em aparelhos telefônicos do sistema mapeada para disparar uma facilidade telefônica rápida ou uma sequência pré-definida de teclas
+
+* Trace (LOGGER): Recurso de diagnóstico nativo do sistema coordenado pela unidade de programa LOGGER
+Permite capturar e analisar registros lógicos de anormalidade do sistema (Error Log), traces de fluxo telefônico por ramal ou posição EQU física, e traces de placas físicas de hardware
+
+* UNIX Command (no MX-ONE): Utilitários administrativos integrados ao MDSH que utilizam identificações dinâmicas de processos e se comunicam através de proxies de mensagem apenas durante o período em que são ativados manualmente pelo administrador
+
  
