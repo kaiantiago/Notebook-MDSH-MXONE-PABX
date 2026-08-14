@@ -37,3 +37,13 @@ Este material é destinado principalmente ao uso técnico e à consulta durante 
 ## Observação
 
 O conteúdo do NotebookLM é uma ferramenta de apoio e não substitui a documentação oficial da Mitel nem os procedimentos internos de mudança, segurança e administração da infraestrutura.
+
+## Curadoria de Fontes
+
+Informação extraída de alguns vídeos do youtube e de documentos de texto gerados a partir do comando Help no próprio terminal MDSH da ferramenta:
+
+https://www.youtube.com/watch?v=KviuXiNr_7w
+https://www.youtube.com/watch?v=pCGGzGaOChk
+https://www.youtube.com/watch?v=ursAwMH1ow0
+https://www.youtube.com/watch?v=HrJq7_yUDeU
+https://www.youtube.com/watch?v=piPZjBQZGY8
