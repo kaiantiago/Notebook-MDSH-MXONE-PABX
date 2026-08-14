@@ -282,4 +282,66 @@ Se o comando extension foi executado mas nenhum backup foi gerado posteriormente
 
 Uso de Backups Agendados (crontab): Para mitigar o esquecimento de backups manuais pós-configuração de ramais, certifique-se de que a conta de administração (mxone_admin) possua rotinas de data_backup configuradas no agendador de tarefas do Linux (crontab -e)
 
+## Introdução: O que é PABX, MiVoice MX-ONE e MDSH
+* PABX (Private Branch Exchange / Central Telefônica Privada): É um sistema de telefonia voltado para o ambiente corporativo que atua como um servidor central. Sua finalidade principal é realizar a comutação e o roteamento de chamadas internas (entre ramais de colegas de trabalho) e externas (com o público em geral), utilizando troncos conectados à rede pública de telefonia. Enquanto os sistemas analógicos tradicionais dependiam de infraestrutura física cabeada, placas e equipamentos locais, os sistemas modernos IP PABX executam chamadas de voz, vídeo e dados através da internet (redes de pacotes).
+* MiVoice MX-ONE: É o sistema PABX IP de nível empresarial desenvolvido pela Mitel. Ele combina software e hardware de gateways de mídia para oferecer comunicações unificadas e flexíveis em grande escala.
+* MDSH (Mitel Directory Shell / MX-ONE Shell): É a interface de linha de comando (CLI) baseada em UNIX executada diretamente sobre o sistema operacional Linux do servidor principal do MX-ONE (o Service Node). Por meio do MDSH, o administrador gerencia configurações de rede, manutenção física, segurança e todas as alterações de dados de usuários e telefonia do PABX.
 
+## Guia Estruturado: Como Criar um Ramal (Extension)
+No MiVoice MX-ONE, a criação de um ramal é feita em duas fases lógicas: primeiro, inicializa-se a entidade básica do ramal (que contém o perfil de serviço do usuário) e, depois, associa-se esse ramal à tecnologia física ou virtual correspondente (IP, DECT ou Remoto).
+
+Fase 1: Inicializar o Ramal Base (Exemplo com o comando extension)
+O primeiro passo obrigatório é criar a entidade lógica do ramal no banco de dados Cassandra do sistema utilizando o comando base extension.
+
+* Sintaxe para criação vinculada a uma LIM física:
+  
+extension -i -d <ramal> -l <número_da_LIM> --csp <perfil_de_serviço>
+
+* Sintaxe para criação vinculada a um Domínio de Rede:
+  
+extension -i -d <ramal> --domain-name <nome_do_domínio> --csp <perfil_de_serviço>
+
+* Parâmetros Principais:
+* -i: Inicializa (cria) o ramal
+* -d <ramal>: Define o número de diretório (Directory Number) ou número do ramal.
+* -l <número>: Especifica a LIM (Logical Interface Module) física de hospedagem.
+* --csp <perfil>: Associa o ramal a um Perfil de Serviço Comum (Common Service Profile), determinando as restrições e categorias do usuário no sistema.
+
+Fase 2: Associar a Tecnologia do Ramal
+Com o número básico criado, deve-se configurar os parâmetros de rede específicos dependendo da tecnologia de comunicação que o ramal utilizará
+A. Ramal IP (Comando ip_extension)
+Utilizado para mapear o ramal básico para telefones que operam em protocolo SIP ou H.323.
+
+* Sintaxe Básica:
+  
+ip_extension -i -d <ramal> --protocol <protocolo> [--max-terminals <número>]
+
+* Sintaxe com Identidade de Terminal específica (URI):
+
+ip_extension -i -d <ramal> --terminal-identity <identidade_terminal> --uri <uri> --protocol <protocolo>
+
+B. Ramal Sem Fio DECT (Comando dect_extension)
+Associa a segurança e a identidade do portátil sem fio ao número de ramal criado para permitir o registro nas antenas de rádio da rede local
+
+* Sintaxe:
+
+dect_extension -i -d <ramal> --ipei <código_IPEI> --authentication-key <chave_de_autenticação>
+
+* Exemplo: dect_extension -i -d 4496 --authentication-key 01234567 --ipei 0000707404102
+
+C. Ramal Remoto / Mobile Extension (Comando remote_extension)
+
+Utilizado para mapear o ramal a um número telefônico externo ao PABX (como o celular público do colaborador).
+
+* Sintaxe:
+
+ remote_extension -i -d <ramal> --remote-number <número_externo>
+
+## Cuidado de Segurança Crítico pós-Execução (Backup de Dados)
+
+As alterações feitas pelos comandos de ramais (extension, ip_extension, etc.) modificam de forma ativa os dados de aplicação no banco de dados Cassandra. No entanto, essas mudanças não são consolidadas em arquivos persistentes de reload automaticamente.
+
+1. Sempre execute data_backup manualmente: O administrador deve rodar o utilitário UNIX data_backup imediatamente após a criação ou alteração de ramais.
+2. Risco de Perda em Inicializações Regenerativas: Se o sistema sofrer uma falha e precisar restaurar dados antes que um backup novo tenha sido executado, a rotina de partida regenerativa ("Start After Data Restore") será forçada. Sob esse estado de recuperação, qualquer ramal que tenha sido adicionado ou modificado após o último backup gravado será completamente removido do PABX.
+
+ 
