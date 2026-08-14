@@ -40,7 +40,7 @@ O conteúdo do NotebookLM é uma ferramenta de apoio e não substitui a document
 
 ## Curadoria de Fontes
 
-Informação extraída de alguns vídeos do youtube e de documentos de texto gerados a partir do comando Help no próprio terminal MDSH da ferramenta:
+Informação extraída de alguns vídeos do youtube e de documentos de texto gerados a partir do comando Help no próprio terminal MDSH da ferramenta. Esses documentos podem ser encontrados neste mesmo repositório.
 
 https://www.youtube.com/watch?v=KviuXiNr_7w
 https://www.youtube.com/watch?v=pCGGzGaOChk
